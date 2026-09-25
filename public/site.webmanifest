@@ -1,0 +1,47 @@
+{
+  "name": "LeoEnglish Pro — Hệ Sinh Thái Học Ngoại Ngữ",
+  "short_name": "LeoEnglish Pro",
+  "description": "Ứng dụng học tiếng Anh & tiếng Trung thông minh với AI chấm phát âm và phản xạ 3 giây.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#1F1209",
+  "theme_color": "#F5B700",
+  "orientation": "portrait",
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
