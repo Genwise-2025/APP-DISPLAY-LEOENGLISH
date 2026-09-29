@@ -217,7 +217,7 @@ export const BookGroup2LandingPage: React.FC = () => {
                   className="w-24 sm:w-28 flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-amber-400/40 aspect-[3/4] bg-black/50 cursor-pointer"
                 >
                   <img
-                    src="/images/books/starter-anh-van-giao-tiep-hi.jpg"
+                    src={groupBooks[0].coverImage || "/images/books/tieng-anh-mat-goc-starter-v2.png"}
                     alt="TIENG ANH CHO NGUOI MAT GOC- STARTER full"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
@@ -257,13 +257,13 @@ export const BookGroup2LandingPage: React.FC = () => {
               </div>
 
               {/* Sách 2: 1000 CÂU PHẢN XẠ */}
-              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-emerald-500/40 hover:border-emerald-400 transition-all group">
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-amber-500/40 hover:border-amber-400 transition-all group">
                 <div 
                   onClick={() => setSelectedBook(groupBooks[1])}
-                  className="w-24 sm:w-28 flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-emerald-400/40 aspect-[3/4] bg-black/50 cursor-pointer"
+                  className="w-24 sm:w-28 flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-amber-400/40 aspect-[3/4] bg-black/50 cursor-pointer"
                 >
                   <img
-                    src="/images/books/leoenglish-1000-cau-phan-xa.png"
+                    src={groupBooks[1].coverImage || "/images/books/1000-cau-phan-xa-white-shirt.png"}
                     alt="1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />

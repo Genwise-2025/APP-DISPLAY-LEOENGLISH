@@ -163,7 +163,7 @@ export const ALL_LIBRARY_BOOKS: BookItem[] = [
     title: 'TIENG ANH CHO NGUOI MAT GOC- STARTER full',
     vietnameseTitle: 'Tiếng Anh Cho Người Mất Gốc — Bản Đầy Đủ Trọn Gói 24 Bài',
     subtitle: 'Lộ trình chuẩn chỉnh xây lại nền tảng từ vựng, ngữ pháp và phát âm IPA',
-    coverImage: '/images/books/starter-anh-van-giao-tiep-hi.jpg',
+    coverImage: '/images/books/tieng-anh-mat-goc-starter-v2.png',
     originalPrice: 80000,
     promoPrice: 40000,
     discountPercent: 50,
@@ -742,8 +742,14 @@ export const BOOK_GROUPS: BookGroup[] = [
     borderGlowClass: 'border-amber-400/60 shadow-[0_0_35px_rgba(245,158,11,0.35)]',
     description: 'Bao gồm 6 đầu sách phong phú từ từ vựng đời sống, truyện đọc thư giãn đến đàm thoại siêu thị, khách sạn và giáo trình cho người mất gốc.',
     books: [
-      findBookByPartialTitle('TIENG ANH CHO NGUOI MAT GOC- STARTER full'),
-      findBookByPartialTitle('1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK'),
+      {
+        ...findBookByPartialTitle('TIENG ANH CHO NGUOI MAT GOC- STARTER full'),
+        coverImage: '/images/books/tieng-anh-mat-goc-starter-v2.png'
+      },
+      {
+        ...findBookByPartialTitle('1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK'),
+        coverImage: '/images/books/1000-cau-phan-xa-white-shirt.png'
+      },
       findBookByPartialTitle('500 Vietnamese-English Daily Vocabulary'),
       findBookByPartialTitle('200 Practical Vietnamese'),
       findBookByPartialTitle('AT THE SUPERMARKET 1'),
