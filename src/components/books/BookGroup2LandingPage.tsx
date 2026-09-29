@@ -90,13 +90,6 @@ export const BookGroup2LandingPage: React.FC = () => {
     setTimeout(() => setIsCopiedLink(false), 2500);
   };
 
-  const handleOpenZaloT390 = () => {
-    const message = encodeURIComponent(
-      'Chào Thầy Leo! Em là học viên nhóm Community 390. Nhờ Thầy gửi giúp em Mã Tải Sách T390 và trọn bộ Audio bài giảng của 6 cuốn sách với ạ!'
-    );
-    window.open(`https://zalo.me/${ADMIN_CONFIG.adminHotline}?text=${message}`, '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-[#1c0e07] text-white flex flex-col selection:bg-amber-500 selection:text-white">
       {/* 1. TOP STICKY NAVIGATION BAR */}
@@ -128,7 +121,7 @@ export const BookGroup2LandingPage: React.FC = () => {
               onClick={() => navigateToView('nhom-3')}
               className="px-3 py-1 rounded-xl bg-purple-950/60 hover:bg-purple-900/80 border border-purple-600/40 text-purple-300 transition-colors flex items-center gap-1"
             >
-              <span>💎 Nhóm 3 (Combo L299)</span>
+              <span>💎 Nhóm 3 (Combo VIP)</span>
             </button>
           </div>
 
@@ -332,7 +325,7 @@ export const BookGroup2LandingPage: React.FC = () => {
                   <span>•</span>
                   <span>GẦN 860 TRANG NỘI DUNG</span>
                   <span>•</span>
-                  <span className="bg-darkbrown text-amber-300 px-2 py-0.5 rounded font-black text-xs">MÃ TẢI: T390</span>
+                  <span className="bg-darkbrown text-amber-300 px-2.5 py-0.5 rounded font-black text-xs">TRỌN BỘ 6 CUỐN EBOOK</span>
                 </span>
               </div>
             </a>
@@ -341,20 +334,11 @@ export const BookGroup2LandingPage: React.FC = () => {
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
               <button
                 type="button"
-                onClick={handleOpenZaloT390}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600/90 hover:bg-blue-600 text-white font-bold transition-all shadow-md"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>Nhắn Zalo Thầy Leo nhận mã T390 &amp; Audio</span>
-              </button>
-
-              <button
-                type="button"
                 onClick={() => {
                   const el = document.getElementById('community-6-books-grid');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-amber-400/40 text-amber-200 font-bold transition-all"
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-amber-400/40 text-amber-200 font-bold transition-all shadow-sm"
               >
                 <Eye className="w-4 h-4 text-amber-300" />
                 <span>Xem chi tiết &amp; tải lẻ 6 cuốn dưới đây</span>
@@ -521,7 +505,7 @@ export const BookGroup2LandingPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="font-black text-white text-sm">LEO ENGLISH EDUCATION</span>
             <span>•</span>
-            <span>Bộ Sách Nhóm 2 Community 390 (Mã: T390)</span>
+            <span>Bộ Sách Nhóm 2 Community 390</span>
           </div>
           <div className="flex items-center gap-4 text-xs font-semibold">
             <button 

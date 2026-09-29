@@ -87,7 +87,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
                   className="text-left py-2 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-950 border border-amber-400 font-black flex items-center justify-between shadow-sm"
                 >
                   <span className="flex items-center gap-1.5">
-                    <span>⭐ Nhóm 2: Community 390 (T390)</span>
+                    <span>⭐ Nhóm 2: Community 390</span>
                   </span>
                   <span className="px-1.5 py-0.5 bg-amber-600 text-white text-[9px] font-black rounded-full">
                     6 CUỐN
@@ -103,7 +103,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
                   className="text-left py-2 px-3 rounded-xl bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-950 border border-purple-400 font-black flex items-center justify-between shadow-sm"
                 >
                   <span className="flex items-center gap-1.5">
-                    <span>💎 Nhóm 3: Combo VIP L299</span>
+                    <span>💎 Nhóm 3: Combo VIP</span>
                   </span>
                   <span className="px-1.5 py-0.5 bg-purple-600 text-white text-[9px] font-black rounded-full">
                     4 CUỐN VIP

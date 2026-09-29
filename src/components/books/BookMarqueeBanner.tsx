@@ -44,7 +44,7 @@ export const BookMarqueeBanner: React.FC<BookMarqueeBannerProps> = ({
           onClick={onNavigateToGroups}
           className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 hover:text-white border border-gold-500/40 text-xs font-bold transition-all"
         >
-          <span>Nhận mã tải 3 nhóm sách VIP</span>
+          <span>Khám phá 3 nhóm sách VIP</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>

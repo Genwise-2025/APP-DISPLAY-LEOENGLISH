@@ -809,3 +809,26 @@ export const mapBookToProduct = (book: BookItem): Product => ({
   zaloCatalogUrl: `https://zalo.me/${ADMIN_CONFIG.adminHotline}?text=${encodeURIComponent('Em muốn đặt mua ebook: ' + book.title + ' (Ưu đãi 40.000đ)')}`
 });
 
+export const get10PageSamplePdfUrl = (book: BookItem): string => {
+  if (book.samplePreviewUrl) return book.samplePreviewUrl;
+  if (book.id === 'book-1000-phan-xa' || (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('1000'))) {
+    return '/downloads/samples/SAMPLE_10_TRANG_1000_CAU_PHAN_XA.pdf';
+  }
+  if (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('1. STARTER')) {
+    return '/downloads/samples/SAMPLE_10_TRANG_1_STARTER.pdf';
+  }
+  if (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('2. BEGINNER')) {
+    return '/downloads/samples/SAMPLE_10_TRANG_2_BEGINNER.pdf';
+  }
+  if (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('3. ELEMENTARY')) {
+    return '/downloads/samples/SAMPLE_10_TRANG_3_ELEMENTARY.pdf';
+  }
+  if (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('4. PRE INTER')) {
+    return '/downloads/samples/SAMPLE_10_TRANG_4_PRE_INTER.pdf';
+  }
+  if (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('5. INTERMEDIATE')) {
+    return '/downloads/samples/SAMPLE_10_TRANG_5_INTERMEDIATE.pdf';
+  }
+  return '/downloads/samples/SAMPLE_10_TRANG_1_STARTER.pdf';
+};
+

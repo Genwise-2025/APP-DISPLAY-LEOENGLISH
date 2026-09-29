@@ -55,13 +55,6 @@ export const Book1000LandingPage: React.FC = () => {
     setTimeout(() => setIsCopiedLink(false), 2500);
   };
 
-  const handleOpenZaloAudio = () => {
-    const message = encodeURIComponent(
-      'Chào Thầy Leo! Em vừa tải sách "1000 Câu Phản Xạ Thực Chiến Kèm Đáp Án" trên web. Nhờ Thầy gửi giúp em link bộ Audio luyện nghe và bài giảng đi kèm nhé!'
-    );
-    window.open(`https://zalo.me/${ADMIN_CONFIG.adminHotline}?text=${message}`, '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-[#061e14] text-white flex flex-col selection:bg-emerald-500 selection:text-white">
       {/* 1. TOP STICKY NAVIGATION BAR */}
@@ -314,7 +307,7 @@ export const Book1000LandingPage: React.FC = () => {
                   {hasDownloaded && (
                     <div className="mt-3 p-3 rounded-xl bg-emerald-900/80 border border-emerald-400 text-emerald-200 text-xs sm:text-sm font-bold flex items-center gap-2 animate-fadeIn">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                      <span>Sách đang được tải về thiết bị của bạn! Bạn có thể bấm nút dưới để xem trực tiếp hoặc nhận audio.</span>
+                      <span>Sách đang được tải về thiết bị của bạn! Bạn có thể bấm nút dưới để xem trực tiếp file PDF.</span>
                     </div>
                   )}
                 </div>
@@ -326,22 +319,12 @@ export const Book1000LandingPage: React.FC = () => {
                     href={cleanPdfUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 min-w-[200px] flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-emerald-400/40 text-emerald-200 text-xs sm:text-sm font-bold transition-all"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-white/10 hover:bg-white/20 border border-emerald-400/40 text-emerald-200 text-sm sm:text-base font-bold transition-all shadow-md"
                   >
                     <Eye className="w-4 h-4 text-amber-400" />
-                    <span>Xem Thử / Đọc Trực Tiếp</span>
+                    <span>Xem Thử / Đọc Trực Tiếp Trên Trình Duyệt</span>
                     <ExternalLink className="w-3.5 h-3.5 opacity-60" />
                   </a>
-
-                  {/* Zalo Audio Request */}
-                  <button
-                    type="button"
-                    onClick={handleOpenZaloAudio}
-                    className="flex-1 min-w-[200px] flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-blue-600/80 hover:bg-blue-600 border border-blue-400 text-white text-xs sm:text-sm font-bold transition-all shadow-md"
-                  >
-                    <Headphones className="w-4 h-4 text-amber-300" />
-                    <span>Nhận Bộ Audio MP3 Qua Zalo</span>
-                  </button>
                 </div>
 
                 {/* File info notice */}

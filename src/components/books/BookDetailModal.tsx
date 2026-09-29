@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BookItem } from '../../types/book';
 import { ADMIN_CONFIG, mapBookToProduct } from '../../data/bookLibrary';
 import { useCart } from '../../context/CartContext';
+import { BookSampleReaderModal } from './BookSampleReaderModal';
 import { 
   X, 
   BookOpen, 
@@ -23,6 +24,7 @@ interface BookDetailModalProps {
 
 export const BookDetailModal: React.FC<BookDetailModalProps> = ({ book, onClose }) => {
   const { addToCart } = useCart();
+  const [showSampleReader, setShowSampleReader] = useState(false);
 
   if (!book) return null;
 
@@ -174,24 +176,34 @@ export const BookDetailModal: React.FC<BookDetailModalProps> = ({ book, onClose 
                   </button>
                 </div>
 
-                {book.pdfDownloadUrl && (
-                  <div className="mt-3 text-center">
-                    <a
-                      href={book.pdfDownloadUrl}
-                      download={`${book.title}.pdf`}
-                      className="text-xs text-warm-600 hover:text-warm-700 underline font-bold inline-flex items-center gap-1"
-                    >
-                      <Download className="w-3 h-3" />
-                      <span>Tải file đọc thử (Sample PDF)</span>
-                    </a>
-                  </div>
-                )}
+                {/* 10-PAGE SAMPLE PREVIEW BUTTON (KHÔNG TẢI NGUYÊN CUỐN NGAY) */}
+                <div className="mt-4 pt-3 border-t border-amber-200/70 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowSampleReader(true)}
+                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-100 via-amber-50 to-amber-100 hover:from-amber-200 hover:to-amber-100 border border-amber-300 text-darkbrown font-black text-xs flex items-center justify-center gap-2 transition-all shadow-sm group cursor-pointer"
+                  >
+                    <BookOpen className="w-4 h-4 text-warm-600 group-hover:scale-110 transition-transform" />
+                    <span>Xem Bản Đọc Thử (10 Trang Đầu Tiên)</span>
+                    <span className="text-[10px] bg-warm-500 text-white px-2 py-0.5 rounded-full font-bold">Miễn Phí</span>
+                  </button>
+                  <p className="text-[11px] text-gray-500 mt-1.5 font-medium">
+                    * Bản đọc thử chỉ gồm 10 trang đầu tiên để bạn trải nghiệm chất lượng sách trước khi mua
+                  </p>
+                </div>
               </div>
 
             </div>
           </div>
         </div>
       </div>
+
+      {/* 10-PAGE SAMPLE READER MODAL */}
+      <BookSampleReaderModal
+        book={book}
+        isOpen={showSampleReader}
+        onClose={() => setShowSampleReader(false)}
+      />
     </div>
   );
 };

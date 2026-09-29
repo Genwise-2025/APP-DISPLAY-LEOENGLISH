@@ -91,13 +91,6 @@ export const BookGroup3LandingPage: React.FC = () => {
     setTimeout(() => setIsCopiedLink(false), 2500);
   };
 
-  const handleOpenZaloL299 = () => {
-    const message = encodeURIComponent(
-      'Chào Thầy Leo! Em là học viên gói Combo VIP L299. Nhờ Thầy gửi giúp em Mã Tải Sách L299VIP và toàn bộ Audio bài giảng của 4 cuốn sách tinh hoa với ạ!'
-    );
-    window.open(`https://zalo.me/${ADMIN_CONFIG.adminHotline}?text=${message}`, '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-[#130722] text-white flex flex-col selection:bg-purple-500 selection:text-white">
       {/* 1. TOP STICKY NAVIGATION BAR */}
@@ -230,7 +223,7 @@ export const BookGroup3LandingPage: React.FC = () => {
                   <span>•</span>
                   <span>HƠN 580 TRANG MÀU ĐẸP</span>
                   <span>•</span>
-                  <span className="bg-amber-400 text-purple-950 px-2 py-0.5 rounded font-black text-xs">MÃ TẢI: L299VIP</span>
+                  <span className="bg-amber-400 text-purple-950 px-2.5 py-0.5 rounded font-black text-xs">TRỌN BỘ 4 CUỐN VIP</span>
                 </span>
               </div>
             </a>
@@ -239,20 +232,11 @@ export const BookGroup3LandingPage: React.FC = () => {
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
               <button
                 type="button"
-                onClick={handleOpenZaloL299}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all shadow-md"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>Nhắn Zalo Thầy Leo nhận mã L299VIP &amp; Audio</span>
-              </button>
-
-              <button
-                type="button"
                 onClick={() => {
                   const el = document.getElementById('combo-4-books-grid');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-purple-400/40 text-purple-200 font-bold transition-all"
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-purple-400/40 text-purple-200 font-bold transition-all shadow-sm"
               >
                 <Eye className="w-4 h-4 text-amber-300" />
                 <span>Xem chi tiết &amp; tải lẻ 4 cuốn dưới đây</span>
@@ -419,7 +403,7 @@ export const BookGroup3LandingPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="font-black text-white text-sm">LEO ENGLISH EDUCATION</span>
             <span>•</span>
-            <span>Bộ Sách Nhóm 3 Combo VIP L299 (Mã: L299VIP)</span>
+            <span>Bộ Sách Nhóm 3 Combo VIP L299</span>
           </div>
           <div className="flex items-center gap-4 text-xs font-semibold">
             <button 

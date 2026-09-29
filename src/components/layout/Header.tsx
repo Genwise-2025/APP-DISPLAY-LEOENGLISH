@@ -90,18 +90,18 @@ export const Header: React.FC = () => {
                   type="button"
                   onClick={() => navigateToView('nhom-2')}
                   className="hover:text-amber-800 transition-colors py-1 relative group flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-amber-500/15 to-yellow-500/15 text-amber-950 rounded-xl border border-amber-400/80 font-black shadow-sm hover:shadow"
-                  title="Trang riêng Nhóm 2: Community 390 (Mã T390)"
+                  title="Trang riêng Nhóm 2: Community 390"
                 >
-                  <span>⭐ Nhóm 2 (T390)</span>
+                  <span>⭐ Nhóm 2 (Community 390)</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => navigateToView('nhom-3')}
                   className="hover:text-purple-800 transition-colors py-1 relative group flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-purple-500/15 to-indigo-500/15 text-purple-950 rounded-xl border border-purple-400/80 font-black shadow-sm hover:shadow"
-                  title="Trang riêng Nhóm 3: Combo VIP L299 (Mã L299VIP)"
+                  title="Trang riêng Nhóm 3: Combo VIP L299"
                 >
-                  <span>💎 Nhóm 3 (L299)</span>
+                  <span>💎 Nhóm 3 (Combo VIP)</span>
                 </button>
               </div>
 
