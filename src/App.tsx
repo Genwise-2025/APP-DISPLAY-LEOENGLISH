@@ -18,6 +18,7 @@ import { ProductDetailModal } from './components/modals/ProductDetailModal';
 import { CartDrawer } from './components/modals/CartDrawer';
 import { AdminCMSModal } from './components/modals/AdminCMSModal';
 import { ToastNotification } from './components/UI/ToastNotification';
+import { BookLibraryHub } from './components/books/BookLibraryHub';
 
 export const AppContent: React.FC = () => {
   return (
@@ -32,6 +33,8 @@ export const AppContent: React.FC = () => {
       <main className="relative z-10 flex-1">
         <HeroSection />
         <AppShowcaseSection />
+        {/* KHO TẢI SÁCH EBOOK, BANNER CHẠY, 3 NHÓM SÁCH (T390, L1000, L299VIP) & KHO SÁCH LẺ 40K */}
+        <BookLibraryHub />
         <CategorySection />
         <ProductGrid />
         <FeaturedCombo />

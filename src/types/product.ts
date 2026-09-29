@@ -16,7 +16,7 @@ export interface Product {
   rating: number;
   ratingCount: number;
   sold: number;
-  badge?: 'Bán chạy' | 'Mới' | 'Ưu đãi' | 'Độc quyền' | 'Hot';
+  badge?: 'Bán chạy' | 'Mới' | 'Ưu đãi' | 'Độc quyền' | 'Hot' | string;
   images: string[];
   features: string[];
   includedItems: string[];

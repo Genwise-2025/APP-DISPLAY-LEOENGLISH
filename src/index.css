@@ -186,9 +186,128 @@
   .book-3d-wrapper:hover,
   .animate-float,
   .animate-pulse-glow,
-  .shimmer-glow {
+  .shimmer-glow,
+  .animate-marquee-left,
+  .btn-light-sweep::after {
     animation: none !important;
     transform: none !important;
     transition: none !important;
   }
 }
+
+/* ----------------------------------------------------
+   DYNAMIC BUTTONS WITH LIGHT EFFECT (CSS ÁNH SÁNG)
+   ---------------------------------------------------- */
+
+@keyframes light-sweep {
+  0% {
+    transform: translateX(-160%) skewX(-25deg);
+  }
+  30%, 100% {
+    transform: translateX(250%) skewX(-25deg);
+  }
+}
+
+@keyframes pulse-gold-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 183, 0, 0.4), 0 0 35px rgba(255, 138, 61, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(245, 183, 0, 0.9), 0 0 60px rgba(255, 138, 61, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes pulse-emerald-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4), 0 0 35px rgba(5, 150, 105, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.9), 0 0 60px rgba(5, 150, 105, 0.5);
+  }
+}
+
+@keyframes pulse-purple-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4), 0 0 35px rgba(109, 40, 217, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.9), 0 0 60px rgba(109, 40, 217, 0.5);
+  }
+}
+
+.btn-dynamic-glow {
+  position: relative;
+  overflow: hidden;
+  animation: pulse-gold-glow 2.8s infinite ease-in-out;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-dynamic-glow-emerald {
+  position: relative;
+  overflow: hidden;
+  animation: pulse-emerald-glow 2.8s infinite ease-in-out;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-dynamic-glow-purple {
+  position: relative;
+  overflow: hidden;
+  animation: pulse-purple-glow 2.8s infinite ease-in-out;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-dynamic-glow:hover,
+.btn-dynamic-glow-emerald:hover,
+.btn-dynamic-glow-purple:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-light-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-light-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent 100%
+  );
+  transform: translateX(-160%) skewX(-25deg);
+  animation: light-sweep 3.2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------
+   CONTINUOUS MARQUEE RUNNING RIGHT TO LEFT
+   ---------------------------------------------------- */
+
+@keyframes marquee-glide-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-glide-left 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left:hover {
+  animation-play-state: paused;
+}
+

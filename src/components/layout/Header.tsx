@@ -94,6 +94,16 @@ export const Header: React.FC = () => {
               </button>
               <button
                 type="button"
+                onClick={() => handleNavClick(undefined, 'kho-sach')}
+                className="hover:text-warm-500 transition-colors py-1 relative group flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-amber-500/15 via-gold-500/20 to-warm-500/15 text-warm-800 rounded-xl border border-amber-300/80 font-black shadow-sm hover:shadow"
+              >
+                <span>📚 Kho Tải Sách</span>
+                <span className="px-1.5 py-0.2 bg-gradient-to-r from-gold-500 to-warm-500 text-[9px] text-white font-black rounded-full shadow-sm animate-pulse">
+                  Mã T390/L1000/L299
+                </span>
+              </button>
+              <button
+                type="button"
                 onClick={() => handleNavClick('all', 'products-section')}
                 className="hover:text-warm-500 transition-colors py-1 relative group"
               >
