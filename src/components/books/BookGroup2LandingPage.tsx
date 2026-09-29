@@ -189,7 +189,7 @@ export const BookGroup2LandingPage: React.FC = () => {
           </div>
 
           {/* Hero Main Header */}
-          <div className="text-center max-w-4xl mx-auto mb-10">
+          <div className="text-center max-w-4xl mx-auto mb-8">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
               NHÓM 2: TRỌN BỘ <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500">COMMUNITY 390</span>
             </h1>
@@ -199,6 +199,109 @@ export const BookGroup2LandingPage: React.FC = () => {
             <p className="mt-4 text-sm sm:text-base text-amber-100/80 leading-relaxed font-medium max-w-2xl mx-auto">
               Trọn bộ tài liệu giá trị nhất giúp bạn xây vững nền tảng từ vựng, phản xạ giao tiếp đời sống, siêu thị, nhà hàng, khách sạn và đọc truyện tiếng Anh tự nhiên!
             </p>
+          </div>
+
+          {/* DUAL SPOTLIGHT 2 QUYỂN LÊN ĐẦU TRANG TRƯNG BÀY (THEO YÊU CẦU CỦA BẠN) */}
+          <div className="max-w-5xl mx-auto mb-10 bg-black/40 border border-amber-500/40 rounded-3xl p-5 sm:p-7 backdrop-blur-xl shadow-2xl">
+            <div className="text-center mb-5">
+              <span className="px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 text-amber-300 text-xs font-black uppercase tracking-widest">
+                ⭐ 2 GIÁO TRÌNH CỐT LÕI HÀNG ĐẦU CỦA COMMUNITY 390 ⭐
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
+              {/* Sách 1: STARTER FULL */}
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all group">
+                <div 
+                  onClick={() => setSelectedBook(groupBooks[0])}
+                  className="w-24 sm:w-28 flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-amber-400/40 aspect-[3/4] bg-black/50 cursor-pointer"
+                >
+                  <img
+                    src="/images/books/starter-anh-van-giao-tiep-hi.jpg"
+                    alt="TIENG ANH CHO NGUOI MAT GOC- STARTER full"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
+                <div className="flex flex-col flex-1 min-w-0">
+                  <span className="text-[10px] font-black text-amber-300 bg-amber-950 px-2 py-0.5 rounded w-max mb-1 border border-amber-600/40">
+                    QUYỂN TRỌNG TÂM #1
+                  </span>
+                  <h3 
+                    onClick={() => setSelectedBook(groupBooks[0])}
+                    className="font-black text-white text-sm sm:text-base leading-snug hover:text-amber-300 cursor-pointer line-clamp-2"
+                  >
+                    TIENG ANH CHO NGUOI MAT GOC - STARTER full
+                  </h3>
+                  <p className="text-xs text-amber-100/70 mt-1 line-clamp-2">
+                    Lộ trình chuẩn chỉnh 24 bài xây lại nền tảng từ vựng, ngữ pháp và phát âm IPA.
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleDownloadSingleBook(groupBooks[0])}
+                      className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-darkbrown font-black text-xs flex items-center gap-1 shadow"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Tải Cuốn 1</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedBook(groupBooks[0])}
+                      className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs"
+                      title="Xem chi tiết"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sách 2: 1000 CÂU PHẢN XẠ */}
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-emerald-500/40 hover:border-emerald-400 transition-all group">
+                <div 
+                  onClick={() => setSelectedBook(groupBooks[1])}
+                  className="w-24 sm:w-28 flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-emerald-400/40 aspect-[3/4] bg-black/50 cursor-pointer"
+                >
+                  <img
+                    src="/images/books/leoenglish-1000-cau-phan-xa.png"
+                    alt="1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
+                <div className="flex flex-col flex-1 min-w-0">
+                  <span className="text-[10px] font-black text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded w-max mb-1 border border-emerald-600/40">
+                    QUYỂN TRỌNG TÂM #2
+                  </span>
+                  <h3 
+                    onClick={() => setSelectedBook(groupBooks[1])}
+                    className="font-black text-white text-sm sm:text-base leading-snug hover:text-emerald-300 cursor-pointer line-clamp-2"
+                  >
+                    1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK
+                  </h3>
+                  <p className="text-xs text-emerald-100/70 mt-1 line-clamp-2">
+                    Độc quyền phương pháp Swivox 3 giây — Phản xạ tức thì kèm toàn bộ đáp án.
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleDownloadSingleBook(groupBooks[1])}
+                      className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-black text-xs flex items-center gap-1 shadow"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Tải Cuốn 2</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedBook(groupBooks[1])}
+                      className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs"
+                      title="Xem chi tiết"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* ============================================================== */}

@@ -742,12 +742,12 @@ export const BOOK_GROUPS: BookGroup[] = [
     borderGlowClass: 'border-amber-400/60 shadow-[0_0_35px_rgba(245,158,11,0.35)]',
     description: 'Bao gồm 6 đầu sách phong phú từ từ vựng đời sống, truyện đọc thư giãn đến đàm thoại siêu thị, khách sạn và giáo trình cho người mất gốc.',
     books: [
+      findBookByPartialTitle('TIENG ANH CHO NGUOI MAT GOC- STARTER full'),
+      findBookByPartialTitle('1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK'),
       findBookByPartialTitle('500 Vietnamese-English Daily Vocabulary'),
-      findBookByPartialTitle('The Girl with Red Hair'),
       findBookByPartialTitle('200 Practical Vietnamese'),
       findBookByPartialTitle('AT THE SUPERMARKET 1'),
-      findBookByPartialTitle('1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK'),
-      findBookByPartialTitle('TIENG ANH CHO NGUOI MAT GOC- STARTER full')
+      findBookByPartialTitle('The Girl with Red Hair')
     ],
     allDownloadUrl: '/downloads/1. STARTER.pdf',
     sampleFileName: 'TRON_BO_COMMUNITY_390_LEOENGLISH.zip'
