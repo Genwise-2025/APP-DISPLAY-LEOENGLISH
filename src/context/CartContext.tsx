@@ -59,6 +59,10 @@ interface CartContextType {
   toasts: ToastMessage[];
   addToast: (title: string, message: string, type?: 'success' | 'info' | 'warning') => void;
   removeToast: (id: string) => void;
+
+  // View / Page Routing
+  currentView: 'home' | '1000-cau';
+  navigateToView: (view: 'home' | '1000-cau') => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -110,6 +114,46 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  // Navigation / Page View State
+  const getInitialView = (): 'home' | '1000-cau' => {
+    try {
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (
+        path.includes('1000-cau') || 
+        path.includes('sach-1000') || 
+        search.includes('1000-cau') || 
+        hash.includes('1000-cau')
+      ) {
+        return '1000-cau';
+      }
+    } catch {}
+    return 'home';
+  };
+
+  const [currentView, setCurrentView] = useState<'home' | '1000-cau'>(getInitialView);
+
+  const navigateToView = (view: 'home' | '1000-cau') => {
+    setCurrentView(view);
+    try {
+      if (view === '1000-cau') {
+        window.history.pushState({ view: '1000-cau' }, '', '/sach-1000-cau');
+      } else {
+        window.history.pushState({ view: 'home' }, '', '/');
+      }
+    } catch {}
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentView(getInitialView());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Sync products to LocalStorage
   useEffect(() => {
@@ -301,6 +345,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         toasts,
         addToast,
         removeToast,
+        currentView,
+        navigateToView,
       }}
     >
       {children}

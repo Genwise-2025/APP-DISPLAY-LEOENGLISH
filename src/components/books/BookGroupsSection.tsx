@@ -14,8 +14,10 @@ import {
   ExternalLink,
   ShieldAlert,
   HelpCircle,
-  FileCheck
+  FileCheck,
+  ArrowRight
 } from 'lucide-react';
+import { useCart } from '../../context/CartContext';
 
 interface BookGroupsSectionProps {
   onSelectBook: (book: BookItem) => void;
@@ -30,6 +32,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
   onOpenAdminModal,
   isAdminAuthenticated
 }) => {
+  const { navigateToView } = useCart();
   // Store input code typed by user for each group
   const [inputCodes, setInputCodes] = useState<Record<string, string>>({
     'nhom-1-l1000': '',
@@ -192,6 +195,20 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                     <p className="text-xs sm:text-sm text-amber-100/80 leading-relaxed font-medium">
                       {group.description}
                     </p>
+
+                    {group.id === 'nhom-1-l1000' && (
+                      <div className="pt-2">
+                        <button
+                          type="button"
+                          onClick={() => navigateToView('1000-cau')}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500/25 to-teal-500/25 border border-emerald-400/60 text-emerald-300 text-xs sm:text-sm font-black hover:bg-emerald-500/35 hover:scale-[1.02] transition-all shadow-md group"
+                        >
+                          <BookOpen className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+                          <span>Mở Trang Tải Riêng Sách 1000 Câu (Nút Tải Thật To)</span>
+                          <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {/* CODE INPUT & DYNAMIC LIGHT BUTTON */}

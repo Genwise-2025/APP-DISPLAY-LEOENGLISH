@@ -4,7 +4,7 @@ import { ShoppingBag, Search, Menu, X, BookOpen, ShieldCheck, User, LogOut } fro
 import { MobileMenu } from './MobileMenu';
 
 export const Header: React.FC = () => {
-  const { totalItems, setIsCartOpen, searchQuery, setSearchQuery, setActiveCategory, setIsAdminOpen, isAdminAuthenticated, adminEmail, logoutAdmin } = useCart();
+  const { totalItems, setIsCartOpen, searchQuery, setSearchQuery, setActiveCategory, setIsAdminOpen, isAdminAuthenticated, adminEmail, logoutAdmin, navigateToView } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -46,6 +46,7 @@ export const Header: React.FC = () => {
             <div
               className="flex items-center gap-2.5 cursor-pointer group"
               onClick={() => {
+                navigateToView('home');
                 setActiveCategory('all');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
@@ -62,14 +63,30 @@ export const Header: React.FC = () => {
             </div>
 
             {/* DESKTOP NAVIGATION LINKS */}
-            <nav className="hidden lg:flex items-center gap-5 text-xs xl:text-sm font-bold text-darkbrown">
+            <nav className="hidden lg:flex items-center gap-4 text-xs xl:text-sm font-bold text-darkbrown">
               <button
                 type="button"
-                onClick={() => handleNavClick('all')}
+                onClick={() => {
+                  navigateToView('home');
+                  handleNavClick('all');
+                }}
                 className="hover:text-warm-500 transition-colors py-1 relative group"
               >
                 Trang chủ
               </button>
+
+              {/* DEDICATED 1000 CÂU PAGE BUTTON */}
+              <button
+                type="button"
+                onClick={() => navigateToView('1000-cau')}
+                className="hover:text-emerald-700 transition-colors py-1 relative group flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-emerald-500/15 via-teal-500/20 to-emerald-500/15 text-emerald-900 rounded-xl border border-emerald-400 font-black shadow-sm hover:shadow"
+              >
+                <span>📗 Sách 1000 Câu</span>
+                <span className="px-1.5 py-0.2 bg-gradient-to-r from-emerald-600 to-teal-600 text-[9px] text-white font-black rounded-full shadow-sm animate-pulse">
+                  Trang Riêng
+                </span>
+              </button>
+
               <button
                 type="button"
                 onClick={() => handleNavClick(undefined, 'app-showcase')}

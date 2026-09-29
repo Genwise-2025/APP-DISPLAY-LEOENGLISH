@@ -19,8 +19,26 @@ import { CartDrawer } from './components/modals/CartDrawer';
 import { AdminCMSModal } from './components/modals/AdminCMSModal';
 import { ToastNotification } from './components/UI/ToastNotification';
 import { BookLibraryHub } from './components/books/BookLibraryHub';
+import { Book1000LandingPage } from './components/books/Book1000LandingPage';
+import { useCart } from './context/CartContext';
 
 export const AppContent: React.FC = () => {
+  const { currentView } = useCart();
+
+  if (currentView === '1000-cau') {
+    return (
+      <div className="relative min-h-screen selection:bg-emerald-500 selection:text-white">
+        <Book1000LandingPage />
+
+        {/* Global Modals & Notifications accessible from 1000-cau page */}
+        <ProductDetailModal />
+        <CartDrawer />
+        <AdminCMSModal />
+        <ToastNotification />
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-white">
       {/* Magical Background Orbs */}

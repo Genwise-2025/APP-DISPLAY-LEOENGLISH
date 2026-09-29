@@ -10,7 +10,7 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavClick }) => {
-  const { setIsPromoModalOpen } = useCart();
+  const { setIsPromoModalOpen, navigateToView } = useCart();
 
   return (
     <AnimatePresence>
@@ -52,11 +52,32 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
               <nav className="mt-6 flex flex-col gap-2 font-bold text-darkbrown text-xs sm:text-sm">
                 <button
                   type="button"
-                  onClick={() => onNavClick('all')}
+                  onClick={() => {
+                    navigateToView('home');
+                    onNavClick('all');
+                  }}
                   className="text-left py-2 px-3 rounded-xl hover:bg-gold-200/40 flex items-center justify-between"
                 >
                   Trang chủ
                 </button>
+
+                {/* DEDICATED 1000 CÂU BUTTON IN MOBILE MENU */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigateToView('1000-cau');
+                    onClose();
+                  }}
+                  className="text-left py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 text-emerald-950 border border-emerald-400 font-black flex items-center justify-between shadow-sm"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>📗 Trang Sách 1000 Câu</span>
+                  </span>
+                  <span className="px-1.5 py-0.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[9px] font-black rounded-full animate-pulse">
+                    TẢI NGAY
+                  </span>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => onNavClick(undefined, 'app-showcase')}
