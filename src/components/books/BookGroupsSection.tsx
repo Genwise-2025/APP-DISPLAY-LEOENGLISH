@@ -175,7 +175,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                       </span>
 
                       <span className="px-3 py-1 rounded-xl bg-white/10 text-white text-xs font-bold border border-white/15">
-                        Trọn bộ {group.books.length} cuốn sách
+                        {group.books.length === 1 ? '1 cuốn sách (Bản màu xanh lá)' : `Trọn bộ ${group.books.length} cuốn sách`}
                       </span>
 
                       {isUnlocked && (
@@ -203,7 +203,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                         ) : (
                           <Lock className="w-4 h-4 text-gold-400" />
                         )}
-                        <span>{isUnlocked ? 'Trạng thái quyền truy cập' : 'Nhập mã để tải toàn bộ:'}</span>
+                        <span>{isUnlocked ? 'Trạng thái quyền truy cập' : 'Nhập mã để tải sách:'}</span>
                       </label>
 
                       <span className="text-[11px] font-black text-gold-400 tracking-wider">
@@ -250,7 +250,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                           className="w-full py-3 px-5 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-warm-500 hover:from-gold-400 hover:to-warm-400 text-darkbrown font-black text-sm tracking-wide shadow-xl btn-dynamic-glow btn-light-sweep flex items-center justify-center gap-2 cursor-pointer group"
                         >
                           <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
-                          <span>XÁC NHẬN MÃ &amp; TẢI TRỌN BỘ</span>
+                          <span>{group.books.length === 1 ? 'XÁC NHẬN MÃ & TẢI SÁCH' : 'XÁC NHẬN MÃ & TẢI TRỌN BỘ'}</span>
                         </button>
                       </div>
                     ) : (
@@ -260,7 +260,9 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                           <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                           <div>
                             <p className="text-xs font-black text-emerald-300">ĐÃ XÁC THỰC MÃ THÀNH CÔNG!</p>
-                            <p className="text-[11px] text-emerald-100/80">Sẵn sàng tải xuống toàn bộ {group.books.length} cuốn.</p>
+                            <p className="text-[11px] text-emerald-100/80">
+                              {group.books.length === 1 ? 'Sẵn sàng tải xuống file sách PDF.' : `Sẵn sàng tải xuống toàn bộ ${group.books.length} cuốn.`}
+                            </p>
                           </div>
                         </div>
 
@@ -271,7 +273,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                           className="w-full py-3 px-5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-black text-sm tracking-wide shadow-2xl btn-dynamic-glow-emerald btn-light-sweep flex items-center justify-center gap-2 cursor-pointer group"
                         >
                           <Download className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                          <span>TẢI TOÀN BỘ SÁCH TRONG NHÓM (.PDF / .ZIP)</span>
+                          <span>{group.books.length === 1 ? 'TẢI SÁCH XANH LÁ (.PDF BẢN QUYỀN)' : 'TẢI TOÀN BỘ SÁCH TRONG NHÓM (.PDF / .ZIP)'}</span>
                         </button>
                       </div>
                     )}
@@ -283,11 +285,15 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-extrabold uppercase tracking-wider text-amber-200 flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4 text-gold-400" />
-                      DANH SÁCH {group.books.length} CUỐN SÁCH TRONG NHÓM NÀY (HIỂN THỊ HÀNG NGANG):
+                      {group.books.length === 1
+                        ? 'SÁCH TRONG NHÓM NÀY (BẢN MÀU XANH LÁ):'
+                        : `DANH SÁCH ${group.books.length} CUỐN SÁCH TRONG NHÓM NÀY (HIỂN THỊ HÀNG NGANG):`}
                     </span>
-                    <span className="text-xs text-amber-200/60 hidden sm:inline">
-                      Cuộn ngang để xem tất cả &rarr;
-                    </span>
+                    {group.books.length > 1 && (
+                      <span className="text-xs text-amber-200/60 hidden sm:inline">
+                        Cuộn ngang để xem tất cả &rarr;
+                      </span>
+                    )}
                   </div>
 
                   {/* Horizontal Scroll Deck */}
@@ -301,7 +307,9 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                           <div>
                             {/* Card Header Info */}
                             <div className="flex items-center justify-between text-[10px] text-amber-200/70 mb-2">
-                              <span className="font-extrabold text-gold-400">Cuốn #{bookIdx + 1}</span>
+                              <span className="font-extrabold text-gold-400">
+                                {group.books.length === 1 ? 'Quyển Màu Xanh Lá' : `Cuốn #${bookIdx + 1}`}
+                              </span>
                               <span className="bg-white/10 px-1.5 py-0.5 rounded text-[9px] font-bold">
                                 {book.pages} trang
                               </span>

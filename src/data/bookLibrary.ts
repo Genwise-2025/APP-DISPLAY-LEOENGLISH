@@ -723,8 +723,7 @@ export const BOOK_GROUPS: BookGroup[] = [
     borderGlowClass: 'border-emerald-500/60 shadow-[0_0_30px_rgba(16,185,129,0.35)]',
     description: 'Tập trung toàn diện vào bộ giáo trình 1000 Câu Phản Xạ Thực Chiến độc quyền từ Mr. Leo, tích hợp bảng phiên âm quốc tế IPA và đáp án chi tiết cho từng câu hỏi.',
     books: [
-      findBookByPartialTitle('1000 Câu Phản Xạ'),
-      findBookByPartialTitle('1000 CÂU THỰC CHIẾN B1-C1')
+      findBookByPartialTitle('1000 Câu Phản Xạ')
     ],
     allDownloadUrl: '/downloads/LEOENGLISH_1000_CAU_PHAN_XA_KEM_DAP_AN (1).pdf',
     sampleFileName: 'LEOENGLISH_1000_CAU_PHAN_XA_KEM_DAP_AN.pdf'
