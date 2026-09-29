@@ -99,7 +99,7 @@ export const Header: React.FC = () => {
               >
                 <span>📚 Kho Tải Sách</span>
                 <span className="px-1.5 py-0.2 bg-gradient-to-r from-gold-500 to-warm-500 text-[9px] text-white font-black rounded-full shadow-sm animate-pulse">
-                  Mã T390/L1000/L299
+                  Mã VIP Học Viên
                 </span>
               </button>
               <button

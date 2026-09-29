@@ -103,7 +103,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
                   className="text-left py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 via-gold-500/25 to-warm-500/20 text-warm-900 border border-amber-300 font-black flex items-center justify-between shadow-sm"
                 >
                   <span className="flex items-center gap-1.5">
-                    <span>📚 Kho Tải Sách (Mã T390/L1000/L299)</span>
+                    <span>📚 Kho Tải Sách (Dành Cho Học Viên)</span>
                   </span>
                   <span className="px-1.5 py-0.5 bg-gradient-to-r from-gold-500 to-warm-500 text-white text-[9px] font-black rounded-full animate-pulse">HOT</span>
                 </button>

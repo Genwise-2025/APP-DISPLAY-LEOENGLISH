@@ -124,7 +124,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
           </h2>
 
           <p className="mt-4 text-sm sm:text-base text-amber-200/80 leading-relaxed font-medium">
-            Học viên nhập mã tải sách tương ứng (<span className="text-gold-300 font-bold">L1000</span>, <span className="text-amber-300 font-bold">T390</span>, <span className="text-purple-300 font-bold">L299VIP</span>) để mở khóa và <strong>tải toàn bộ trọn bộ sách</strong> trong nhóm đó ngay lập tức!
+            Học viên nhập mã tải sách riêng được Thầy Leo cấp (qua Zalo) để mở khóa và <strong>tải sách về máy</strong> ngay lập tức!
           </p>
 
           {/* Quick Admin Helper Bar */}
@@ -206,9 +206,15 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                         <span>{isUnlocked ? 'Trạng thái quyền truy cập' : 'Nhập mã để tải sách:'}</span>
                       </label>
 
-                      <span className="text-[11px] font-black text-gold-400 tracking-wider">
-                        MÃ: {group.code}
-                      </span>
+                      {isAdminAuthenticated ? (
+                        <span className="text-[11px] font-black text-emerald-400 tracking-wider bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-500/50">
+                          MÃ ADMIN: {group.code}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-bold text-amber-300/80 tracking-wider">
+                          MÃ BẢO MẬT VIP
+                        </span>
+                      )}
                     </div>
 
                     {!isUnlocked ? (
@@ -231,7 +237,7 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                                 handleVerifyCode(group);
                               }
                             }}
-                            placeholder={`Nhập đúng mã "${group.code}"...`}
+                            placeholder="Nhập mã tải sách được cấp qua Zalo..."
                             className="w-full px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm font-bold uppercase tracking-wider focus:outline-none focus:border-gold-400 focus:bg-white/15 transition-all"
                           />
                         </div>

@@ -8,7 +8,7 @@ import { AdminDownloadManagerModal } from './AdminDownloadManagerModal';
 import { useCart } from '../../context/CartContext';
 
 export const BookLibraryHub: React.FC = () => {
-  const { isAdminAuthenticated, loginAdmin } = useCart();
+  const { isAdminAuthenticated, loginAdmin, logoutAdmin } = useCart();
   const [selectedBook, setSelectedBook] = useState<BookItem | null>(null);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
@@ -50,6 +50,7 @@ export const BookLibraryHub: React.FC = () => {
         onClose={() => setIsAdminModalOpen(false)}
         isAdminAuthenticated={isAdminAuthenticated}
         onLoginSuccess={(email) => loginAdmin(email, 'Dinh100216')}
+        onLogout={logoutAdmin}
       />
     </div>
   );
