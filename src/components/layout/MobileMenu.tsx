@@ -61,20 +61,52 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
                   Trang chủ
                 </button>
 
-                {/* DEDICATED 1000 CÂU BUTTON IN MOBILE MENU */}
+                {/* DEDICATED 3 GROUPS BUTTONS IN MOBILE MENU */}
                 <button
                   type="button"
                   onClick={() => {
                     navigateToView('1000-cau');
                     onClose();
                   }}
-                  className="text-left py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 text-emerald-950 border border-emerald-400 font-black flex items-center justify-between shadow-sm"
+                  className="text-left py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-950 border border-emerald-400 font-black flex items-center justify-between shadow-sm"
                 >
                   <span className="flex items-center gap-1.5">
-                    <span>📗 Trang Sách 1000 Câu</span>
+                    <span>📗 Nhóm 1: Sách 1000 Câu</span>
                   </span>
-                  <span className="px-1.5 py-0.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[9px] font-black rounded-full animate-pulse">
+                  <span className="px-1.5 py-0.5 bg-emerald-600 text-white text-[9px] font-black rounded-full animate-pulse">
                     TẢI NGAY
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigateToView('nhom-2');
+                    onClose();
+                  }}
+                  className="text-left py-2 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-950 border border-amber-400 font-black flex items-center justify-between shadow-sm"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>⭐ Nhóm 2: Community 390 (T390)</span>
+                  </span>
+                  <span className="px-1.5 py-0.5 bg-amber-600 text-white text-[9px] font-black rounded-full">
+                    6 CUỐN
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigateToView('nhom-3');
+                    onClose();
+                  }}
+                  className="text-left py-2 px-3 rounded-xl bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-950 border border-purple-400 font-black flex items-center justify-between shadow-sm"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>💎 Nhóm 3: Combo VIP L299</span>
+                  </span>
+                  <span className="px-1.5 py-0.5 bg-purple-600 text-white text-[9px] font-black rounded-full">
+                    4 CUỐN VIP
                   </span>
                 </button>
 

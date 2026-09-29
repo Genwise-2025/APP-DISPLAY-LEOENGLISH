@@ -75,17 +75,35 @@ export const Header: React.FC = () => {
                 Trang chủ
               </button>
 
-              {/* DEDICATED 1000 CÂU PAGE BUTTON */}
-              <button
-                type="button"
-                onClick={() => navigateToView('1000-cau')}
-                className="hover:text-emerald-700 transition-colors py-1 relative group flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-emerald-500/15 via-teal-500/20 to-emerald-500/15 text-emerald-900 rounded-xl border border-emerald-400 font-black shadow-sm hover:shadow"
-              >
-                <span>📗 Sách 1000 Câu</span>
-                <span className="px-1.5 py-0.2 bg-gradient-to-r from-emerald-600 to-teal-600 text-[9px] text-white font-black rounded-full shadow-sm animate-pulse">
-                  Trang Riêng
-                </span>
-              </button>
+              {/* DEDICATED 3 BOOK GROUPS QUICK NAV */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => navigateToView('1000-cau')}
+                  className="hover:text-emerald-700 transition-colors py-1 relative group flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-emerald-500/15 to-teal-500/15 text-emerald-900 rounded-xl border border-emerald-400/80 font-black shadow-sm hover:shadow"
+                  title="Trang riêng Nhóm 1: 1000 Câu Phản Xạ"
+                >
+                  <span>📗 1000 Câu</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => navigateToView('nhom-2')}
+                  className="hover:text-amber-800 transition-colors py-1 relative group flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-amber-500/15 to-yellow-500/15 text-amber-950 rounded-xl border border-amber-400/80 font-black shadow-sm hover:shadow"
+                  title="Trang riêng Nhóm 2: Community 390 (Mã T390)"
+                >
+                  <span>⭐ Nhóm 2 (T390)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => navigateToView('nhom-3')}
+                  className="hover:text-purple-800 transition-colors py-1 relative group flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-purple-500/15 to-indigo-500/15 text-purple-950 rounded-xl border border-purple-400/80 font-black shadow-sm hover:shadow"
+                  title="Trang riêng Nhóm 3: Combo VIP L299 (Mã L299VIP)"
+                >
+                  <span>💎 Nhóm 3 (L299)</span>
+                </button>
+              </div>
 
               <button
                 type="button"

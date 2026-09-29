@@ -209,6 +209,34 @@ export const BookGroupsSection: React.FC<BookGroupsSectionProps> = ({
                         </button>
                       </div>
                     )}
+
+                    {group.id === 'nhom-2-t390' && (
+                      <div className="pt-2">
+                        <button
+                          type="button"
+                          onClick={() => navigateToView('nhom-2')}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500/25 to-yellow-500/25 border border-amber-400/60 text-amber-300 text-xs sm:text-sm font-black hover:bg-amber-500/35 hover:scale-[1.02] transition-all shadow-md group"
+                        >
+                          <BookOpen className="w-4 h-4 text-yellow-300 group-hover:scale-110 transition-transform" />
+                          <span>Mở Trang Tải Riêng Nhóm 2 Community 390 (Nút Tải Thật To)</span>
+                          <ArrowRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      </div>
+                    )}
+
+                    {group.id === 'nhom-3-l299vip' && (
+                      <div className="pt-2">
+                        <button
+                          type="button"
+                          onClick={() => navigateToView('nhom-3')}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-500/25 to-indigo-500/25 border border-purple-400/60 text-purple-300 text-xs sm:text-sm font-black hover:bg-purple-500/35 hover:scale-[1.02] transition-all shadow-md group"
+                        >
+                          <BookOpen className="w-4 h-4 text-amber-300 group-hover:scale-110 transition-transform" />
+                          <span>Mở Trang Tải Riêng Nhóm 3 Combo VIP L299 (Nút Tải Thật To)</span>
+                          <ArrowRight className="w-4 h-4 text-purple-300 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   {/* CODE INPUT & DYNAMIC LIGHT BUTTON */}

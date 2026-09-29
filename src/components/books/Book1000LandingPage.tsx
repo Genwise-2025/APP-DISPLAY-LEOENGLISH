@@ -79,6 +79,24 @@ export const Book1000LandingPage: React.FC = () => {
             <span className="sm:hidden">Trang Chủ</span>
           </button>
 
+          {/* Quick Switch to Group 2 and Group 3 */}
+          <div className="hidden md:flex items-center gap-2 text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => navigateToView('nhom-2')}
+              className="px-3 py-1 rounded-xl bg-amber-950/60 hover:bg-amber-900/80 border border-amber-600/40 text-amber-300 transition-colors flex items-center gap-1"
+            >
+              <span>⭐ Nhóm 2 (Community 390)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => navigateToView('nhom-3')}
+              className="px-3 py-1 rounded-xl bg-purple-950/60 hover:bg-purple-900/80 border border-purple-600/40 text-purple-300 transition-colors flex items-center gap-1"
+            >
+              <span>💎 Nhóm 3 (Combo L299)</span>
+            </button>
+          </div>
+
           {/* Logo Brand */}
           <div 
             onClick={() => navigateToView('home')}

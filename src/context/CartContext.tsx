@@ -61,9 +61,11 @@ interface CartContextType {
   removeToast: (id: string) => void;
 
   // View / Page Routing
-  currentView: 'home' | '1000-cau';
-  navigateToView: (view: 'home' | '1000-cau') => void;
+  currentView: AppView;
+  navigateToView: (view: AppView) => void;
 }
+
+export type AppView = 'home' | '1000-cau' | 'nhom-2' | 'nhom-3';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -116,14 +118,33 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
   // Navigation / Page View State
-  const getInitialView = (): 'home' | '1000-cau' => {
+  const getInitialView = (): AppView => {
     try {
       const path = window.location.pathname.toLowerCase();
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       if (
+        path.includes('nhom-2') || 
+        path.includes('community-390') || 
+        path.includes('t390') || 
+        search.includes('nhom-2') || 
+        hash.includes('nhom-2')
+      ) {
+        return 'nhom-2';
+      }
+      if (
+        path.includes('nhom-3') || 
+        path.includes('combo-l299') || 
+        path.includes('l299vip') || 
+        search.includes('nhom-3') || 
+        hash.includes('nhom-3')
+      ) {
+        return 'nhom-3';
+      }
+      if (
         path.includes('1000-cau') || 
         path.includes('sach-1000') || 
+        path.includes('nhom-1') || 
         search.includes('1000-cau') || 
         hash.includes('1000-cau')
       ) {
@@ -133,13 +154,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return 'home';
   };
 
-  const [currentView, setCurrentView] = useState<'home' | '1000-cau'>(getInitialView);
+  const [currentView, setCurrentView] = useState<AppView>(getInitialView);
 
-  const navigateToView = (view: 'home' | '1000-cau') => {
+  const navigateToView = (view: AppView) => {
     setCurrentView(view);
     try {
       if (view === '1000-cau') {
         window.history.pushState({ view: '1000-cau' }, '', '/sach-1000-cau');
+      } else if (view === 'nhom-2') {
+        window.history.pushState({ view: 'nhom-2' }, '', '/nhom-2-community-390');
+      } else if (view === 'nhom-3') {
+        window.history.pushState({ view: 'nhom-3' }, '', '/nhom-3-combo-l299');
       } else {
         window.history.pushState({ view: 'home' }, '', '/');
       }

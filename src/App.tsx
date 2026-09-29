@@ -20,6 +20,8 @@ import { AdminCMSModal } from './components/modals/AdminCMSModal';
 import { ToastNotification } from './components/UI/ToastNotification';
 import { BookLibraryHub } from './components/books/BookLibraryHub';
 import { Book1000LandingPage } from './components/books/Book1000LandingPage';
+import { BookGroup2LandingPage } from './components/books/BookGroup2LandingPage';
+import { BookGroup3LandingPage } from './components/books/BookGroup3LandingPage';
 import { useCart } from './context/CartContext';
 
 export const AppContent: React.FC = () => {
@@ -30,7 +32,35 @@ export const AppContent: React.FC = () => {
       <div className="relative min-h-screen selection:bg-emerald-500 selection:text-white">
         <Book1000LandingPage />
 
-        {/* Global Modals & Notifications accessible from 1000-cau page */}
+        {/* Global Modals & Notifications */}
+        <ProductDetailModal />
+        <CartDrawer />
+        <AdminCMSModal />
+        <ToastNotification />
+      </div>
+    );
+  }
+
+  if (currentView === 'nhom-2') {
+    return (
+      <div className="relative min-h-screen selection:bg-amber-500 selection:text-white">
+        <BookGroup2LandingPage />
+
+        {/* Global Modals & Notifications */}
+        <ProductDetailModal />
+        <CartDrawer />
+        <AdminCMSModal />
+        <ToastNotification />
+      </div>
+    );
+  }
+
+  if (currentView === 'nhom-3') {
+    return (
+      <div className="relative min-h-screen selection:bg-purple-500 selection:text-white">
+        <BookGroup3LandingPage />
+
+        {/* Global Modals & Notifications */}
         <ProductDetailModal />
         <CartDrawer />
         <AdminCMSModal />
