@@ -157,30 +157,31 @@ export const ALL_LIBRARY_BOOKS: BookItem[] = [
     reviewsCount: 164
   },
 
-  // 6. TIENG ANH CHO NGUOI MAT GOC - STARTER full
+  // 6. TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC (Bản mới 118 trang thay thế quyển cũ)
   {
-    id: 'book-tieng-anh-mat-goc-starter',
-    title: 'TIENG ANH CHO NGUOI MAT GOC- STARTER full',
-    vietnameseTitle: 'Tiếng Anh Cho Người Mất Gốc — Bản Đầy Đủ Trọn Gói 24 Bài',
-    subtitle: 'Lộ trình chuẩn chỉnh xây lại nền tảng từ vựng, ngữ pháp và phát âm IPA',
-    coverImage: '/images/books/tieng-anh-mat-goc-starter-v2.png',
+    id: 'book-tieng-anh-giao-tiep-mat-goc',
+    title: 'TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC',
+    vietnameseTitle: 'Tiếng Anh Giao Tiếp Cho Người Mất Gốc — Mr. Leo',
+    subtitle: 'Vận dụng hơn 500 câu và 1000 từ vựng thông dụng nhất (12 Unit thực chiến)',
+    coverImage: '/images/books/tieng-anh-giao-tiep-cho-nguoi-mat-goc-cover.png',
     originalPrice: 80000,
     promoPrice: 40000,
     discountPercent: 50,
     category: 'communication',
     categoryLabel: 'Lấy Gốc Tiếng Anh',
-    pages: 172,
-    fileSize: '7.1 MB',
-    level: 'Mất Gốc -> Tự Tin Nói',
-    description: 'Giáo trình cốt lõi LEOENGLISH được thiết kế riêng cho người Việt mất gốc. Hướng dẫn từng bước từ chào hỏi, giới thiệu bản thân, con số, gia đình đến đàm thoại đời sống trôi chảy.',
+    pages: 118,
+    fileSize: '9.2 MB',
+    level: 'Mất Gốc Đến Giao Tiếp Tự Tin',
+    description: 'Giáo trình đột phá của thầy Leo Nguyễn giúp người mất gốc vận dụng ngay hơn 500 câu đàm thoại và 1000 từ vựng thông dụng qua 12 chủ đề thực tế: Chào hỏi, Bản thân, Gia đình & Bạn bè, Nghề nghiệp, Chỉ đường, Thời gian rảnh & Sở thích, Lịch trình hàng ngày, Mua sắm, Đặt bàn nhà hàng, Thời tiết, Du lịch, Phương tiện giao thông.',
     highlights: [
-      '24 Unit toàn diện từ con số 0 lên phản xạ đàm thoại',
-      'Bảng phiên âm chuẩn quốc tế IPA phiên âm theo ngữ điệu người Việt',
-      'Bài tập tình huống và đối thoại thực chiến',
-      'Tặng kèm audio chuẩn giọng Mỹ'
+      '12 chủ đề đàm thoại thực chiến đời sống cốt lõi',
+      'Hướng dẫn phát âm chuẩn quốc tế IPA chi tiết từng âm',
+      'Tích hợp bảng 1000 từ vựng thông dụng kèm phiên âm và nghĩa',
+      'Quét mã QR xem video phát âm khẩu hình chuẩn'
     ],
-    pdfDownloadUrl: '/downloads/1. STARTER.pdf',
-    badge: 'KHUYÊN DÙNG CHO MẤT GỐC',
+    pdfDownloadUrl: '/downloads/TIENG_ANH_GIAO_TIEP_CHO_NGUOI_MAT_GOC.pdf',
+    samplePreviewUrl: '/downloads/samples/SAMPLE_10_TRANG_TIENG_ANH_GIAO_TIEP_CHO_NGUOI_MAT_GOC.pdf',
+    badge: 'GIÁO TRÌNH MỚI 2026',
     rating: 5.0,
     reviewsCount: 520
   },
@@ -742,10 +743,7 @@ export const BOOK_GROUPS: BookGroup[] = [
     borderGlowClass: 'border-amber-400/60 shadow-[0_0_35px_rgba(245,158,11,0.35)]',
     description: 'Bao gồm 6 đầu sách phong phú từ từ vựng đời sống, truyện đọc thư giãn đến đàm thoại siêu thị, khách sạn và giáo trình cho người mất gốc.',
     books: [
-      {
-        ...findBookByPartialTitle('TIENG ANH CHO NGUOI MAT GOC- STARTER full'),
-        coverImage: '/images/books/tieng-anh-mat-goc-starter-v2.png'
-      },
+      findBookByPartialTitle('TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC'),
       {
         ...findBookByPartialTitle('1000 Câu Phản Xạ Anh Văn Thực Chiến EBOOK'),
         coverImage: '/images/books/1000-cau-phan-xa-white-shirt.png'
@@ -755,7 +753,7 @@ export const BOOK_GROUPS: BookGroup[] = [
       findBookByPartialTitle('AT THE SUPERMARKET 1'),
       findBookByPartialTitle('The Girl with Red Hair')
     ],
-    allDownloadUrl: '/downloads/1. STARTER.pdf',
+    allDownloadUrl: '/downloads/TIENG_ANH_GIAO_TIEP_CHO_NGUOI_MAT_GOC.pdf',
     sampleFileName: 'TRON_BO_COMMUNITY_390_LEOENGLISH.zip'
   },
 
@@ -772,7 +770,7 @@ export const BOOK_GROUPS: BookGroup[] = [
     borderGlowClass: 'border-purple-400/60 shadow-[0_0_35px_rgba(139,92,246,0.35)]',
     description: 'Sự kết hợp hoàn hảo giữa lấy gốc tiếng Anh cơ bản, đọc truyện thẩm thấu và 500 cụm từ nói lưu loát tức thì chuẩn Tây.',
     books: [
-      findBookByPartialTitle('TIENG ANH CHO NGUOI MAT GOC- STARTER full'),
+      findBookByPartialTitle('TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC'),
       findBookByPartialTitle('The Girl with Red Hair'),
       findBookByPartialTitle('500 English Phrases for Instant Fluency'),
       findBookByPartialTitle('500 Vietnamese-English Daily Vocabulary')
@@ -811,6 +809,9 @@ export const mapBookToProduct = (book: BookItem): Product => ({
 
 export const get10PageSamplePdfUrl = (book: BookItem): string => {
   if (book.samplePreviewUrl) return book.samplePreviewUrl;
+  if (book.id === 'book-tieng-anh-giao-tiep-mat-goc' || (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('TIENG_ANH_GIAO_TIEP_CHO_NGUOI_MAT_GOC'))) {
+    return '/downloads/samples/SAMPLE_10_TRANG_TIENG_ANH_GIAO_TIEP_CHO_NGUOI_MAT_GOC.pdf';
+  }
   if (book.id === 'book-1000-phan-xa' || (book.pdfDownloadUrl && book.pdfDownloadUrl.includes('1000'))) {
     return '/downloads/samples/SAMPLE_10_TRANG_1000_CAU_PHAN_XA.pdf';
   }

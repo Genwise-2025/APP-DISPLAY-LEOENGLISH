@@ -203,15 +203,15 @@ export const BookGroup2LandingPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
-              {/* Sách 1: STARTER FULL */}
+              {/* Sách 1: TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC */}
               <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all group">
                 <div 
                   onClick={() => setSelectedBook(groupBooks[0])}
                   className="w-24 sm:w-28 flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-amber-400/40 aspect-[3/4] bg-black/50 cursor-pointer"
                 >
                   <img
-                    src={groupBooks[0].coverImage || "/images/books/tieng-anh-mat-goc-starter-v2.png"}
-                    alt="TIENG ANH CHO NGUOI MAT GOC- STARTER full"
+                    src={groupBooks[0]?.coverImage || "/images/books/tieng-anh-giao-tiep-cho-nguoi-mat-goc-cover.png"}
+                    alt={groupBooks[0]?.title || "TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC"}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
                 </div>
@@ -223,10 +223,10 @@ export const BookGroup2LandingPage: React.FC = () => {
                     onClick={() => setSelectedBook(groupBooks[0])}
                     className="font-black text-white text-sm sm:text-base leading-snug hover:text-amber-300 cursor-pointer line-clamp-2"
                   >
-                    TIENG ANH CHO NGUOI MAT GOC - STARTER full
+                    {groupBooks[0]?.title || "TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC"}
                   </h3>
                   <p className="text-xs text-amber-100/70 mt-1 line-clamp-2">
-                    Lộ trình chuẩn chỉnh 24 bài xây lại nền tảng từ vựng, ngữ pháp và phát âm IPA.
+                    {groupBooks[0]?.subtitle || "Vận dụng hơn 500 câu và 1000 từ vựng thông dụng nhất qua 12 Unit thực chiến."}
                   </p>
                   <div className="mt-3 flex items-center gap-2">
                     <button
@@ -460,7 +460,7 @@ export const BookGroup2LandingPage: React.FC = () => {
               <div className="p-4 rounded-2xl bg-amber-950/60 border border-amber-700/40">
                 <span className="text-xs font-black text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded">BƯỚC 1</span>
                 <h4 className="font-bold text-white text-sm mt-2">Lấy Lại Gốc Toàn Diện</h4>
-                <p className="text-xs text-amber-100/70 mt-1">Xây nền với cuốn STARTER FULL 24 bài & bảng phiên âm quốc tế IPA.</p>
+                <p className="text-xs text-amber-100/70 mt-1">Xây nền với cuốn TIẾNG ANH GIAO TIẾP CHO NGƯỜI MẤT GỐC (12 Unit thực chiến &amp; 1000 từ vựng).</p>
               </div>
 
               <div className="p-4 rounded-2xl bg-amber-950/60 border border-amber-700/40">
