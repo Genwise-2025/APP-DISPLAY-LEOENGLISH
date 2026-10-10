@@ -65,9 +65,11 @@ export const Header: React.FC = () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-gold-500 via-warm-400 to-honey flex items-center justify-center shadow-md group-hover:scale-105 transition-transform border border-amber-200">
-                <BookOpen className="w-5 h-5 text-darkbrown font-black" />
-              </div>
+              <img
+                src="/images/logo-book-vip.png"
+                alt="Leo English Book VIP"
+                className="w-10 h-10 rounded-2xl object-cover shadow-md group-hover:scale-105 transition-transform border-2 border-gold-400"
+              />
               <div className="flex flex-col">
                 <span className="font-black text-lg sm:text-xl tracking-tight text-darkbrown flex items-center gap-1 leading-none">
                   LEO <span className="text-warm-500 font-black">EDUCATION</span>
@@ -96,7 +98,8 @@ export const Header: React.FC = () => {
                 className="transition-all py-1 px-3 rounded-xl bg-gradient-to-r from-amber-500/25 via-gold-500/30 to-warm-500/25 hover:from-amber-500/40 hover:to-warm-500/40 text-darkbrown border-2 border-gold-400 font-black shadow-sm hover:shadow-md hover:scale-105 flex items-center gap-1.5"
                 title="Trang riêng Kho Sách Số VIP (Full 11 mục, tải full từng mục bằng Gmail)"
               >
-                <span>👑 KHO SÁCH VIP (FULL)</span>
+                <img src="/images/logo-book-vip.png" alt="VIP" className="w-4 h-4 rounded-full border border-gold-400 object-cover shadow-sm" />
+                <span>KHO SÁCH VIP (FULL)</span>
                 <span className="px-1.5 py-0.2 bg-gradient-to-r from-gold-500 to-warm-500 text-white text-[9px] font-black rounded-full animate-pulse">
                   HOT
                 </span>

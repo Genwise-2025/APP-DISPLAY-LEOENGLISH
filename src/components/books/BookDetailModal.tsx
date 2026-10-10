@@ -74,6 +74,11 @@ export const BookDetailModal: React.FC<BookDetailModalProps> = ({ book, onClose 
                 <span className="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-rose-600 text-white text-[10px] font-black shadow-sm">
                   -50% HỌC VIÊN MỚI
                 </span>
+
+                {/* Official VIP Seal Stamp */}
+                <div className="absolute bottom-3 right-3 w-8 h-8 rounded-xl overflow-hidden border border-gold-400 shadow-md" title="Sách Bản Quyền VIP LeoEnglish">
+                  <img src="/images/logo-book-vip.png" alt="VIP Seal" className="w-full h-full object-cover" />
+                </div>
               </div>
 
               {/* Quick specs */}
@@ -93,6 +98,7 @@ export const BookDetailModal: React.FC<BookDetailModalProps> = ({ book, onClose 
             <div className="w-full md:w-7/12 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
+                  <img src="/images/logo-book-vip.png" alt="VIP" className="w-5 h-5 rounded-md border border-gold-400 object-cover shadow-sm" />
                   <span className="px-2.5 py-0.5 rounded-full bg-gold-500/20 text-warm-700 text-xs font-black uppercase">
                     {book.categoryLabel}
                   </span>

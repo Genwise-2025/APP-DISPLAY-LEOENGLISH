@@ -41,11 +41,16 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
             <div>
               {/* Header */}
               <div className="flex items-center justify-between pb-6 border-b border-amber-200">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-gold-500 flex items-center justify-center font-bold text-darkbrown">
-                    <BookOpen className="w-4 h-4" />
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src="/images/logo-book-vip.png"
+                    alt="Book VIP Leo"
+                    className="w-9 h-9 rounded-xl border-2 border-gold-400 shadow-md object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <span className="font-black text-sm text-darkbrown leading-tight">LEO EDUCATION</span>
+                    <span className="text-[9px] text-warm-700 font-bold uppercase">Book VIP Official</span>
                   </div>
-                  <span className="font-extrabold text-base text-darkbrown">LEO EDUCATION</span>
                 </div>
                 <button
                   type="button"

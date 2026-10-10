@@ -5,7 +5,7 @@ import { BookItem } from '../../types/book';
 import { CSS3DBook } from '../UI/CSS3DBook';
 import { BookDetailModal } from './BookDetailModal';
 import { BookSampleReaderModal } from './BookSampleReaderModal';
-import { AdminStudentManagerModal } from '../modals/AdminStudentManagerModal';
+import { AdminCMSModal } from '../modals/AdminCMSModal';
 import { 
   ArrowLeft, 
   Crown, 
@@ -155,10 +155,12 @@ export const VIPBookLibraryPage: React.FC = () => {
               <span>Về Trang Chủ</span>
             </button>
 
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-gold-500 to-warm-500 text-darkbrown flex items-center justify-center font-black shadow-glow-gold">
-                <Crown className="w-4 h-4" />
-              </div>
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/images/logo-book-vip.png"
+                alt="Book VIP"
+                className="w-8 h-8 rounded-xl border border-gold-400 shadow-glow-gold object-cover"
+              />
               <div>
                 <h1 className="text-sm sm:text-base font-black text-white flex items-center gap-1.5">
                   <span>KHO SÁCH SỐ FULL VIP</span>
@@ -219,7 +221,15 @@ export const VIPBookLibraryPage: React.FC = () => {
       </header>
 
       {/* 2. PAGE HERO BANNER */}
-      <section className="relative px-4 sm:px-6 lg:px-8 pt-10 pb-6 max-w-7xl mx-auto text-center">
+      <section className="relative px-4 sm:px-6 lg:px-8 pt-8 pb-6 max-w-7xl mx-auto text-center">
+        <div className="flex justify-center mb-4">
+          <img
+            src="/images/logo-book-vip.png"
+            alt="Book VIP Leo"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl border-2 border-gold-400 shadow-glow-gold object-cover hover:scale-105 transition-transform"
+          />
+        </div>
+
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-400/40 text-gold-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-glow-gold">
           <Sparkles className="w-3.5 h-3.5 text-gold-400" />
           ĐẶC QUYỀN TRỌN BỘ SÁCH SỐ BẢN QUYỀN
@@ -239,9 +249,11 @@ export const VIPBookLibraryPage: React.FC = () => {
             /* STATE: ALREADY UNLOCKED (NHẬP 1 LẦN LÀ TẢI ĐƯỢC HẾT) */
             <div className="p-6 rounded-3xl bg-gradient-to-r from-emerald-950/80 via-[#10271E] to-teal-950/80 border-2 border-emerald-400/60 shadow-[0_0_30px_rgba(16,185,129,0.25)] text-left flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-400 flex-shrink-0">
-                  <CheckCircle2 className="w-7 h-7" />
-                </div>
+                <img
+                  src="/images/logo-book-vip.png"
+                  alt="Book VIP Leo"
+                  className="w-14 h-14 rounded-2xl border-2 border-emerald-400 shadow-md object-cover flex-shrink-0"
+                />
                 <div>
                   <div className="text-xs uppercase font-mono text-emerald-300 font-bold tracking-wider">
                     🎉 TRẠNG THÁI: ĐÃ MỞ KHÓA VĨNH VIỄN
@@ -268,9 +280,11 @@ export const VIPBookLibraryPage: React.FC = () => {
             /* STATE: NOT UNLOCKED YET -> ENTER GMAIL ONCE */
             <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#25150B] to-[#180C05] border-2 border-gold-500/50 shadow-2xl text-left space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gold-500/20 border border-gold-400 flex items-center justify-center text-gold-400">
-                  <Mail className="w-5 h-5" />
-                </div>
+                <img
+                  src="/images/logo-book-vip.png"
+                  alt="Book VIP Leo"
+                  className="w-12 h-12 rounded-2xl border-2 border-gold-400 shadow-md object-cover flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-base sm:text-lg font-black text-white">
                     Nhập Gmail Của Bạn Để Mở Khóa Tải Toàn Bộ Sách
@@ -543,10 +557,7 @@ export const VIPBookLibraryPage: React.FC = () => {
         onClose={() => setSampleReaderBook(null)}
       />
 
-      <AdminStudentManagerModal
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-      />
+      <AdminCMSModal />
     </div>
   );
 };

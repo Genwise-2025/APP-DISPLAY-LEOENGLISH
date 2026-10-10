@@ -193,6 +193,20 @@ export const HeroSection: React.FC = () => {
             {/* Background Halo Aura Light */}
             <div className="absolute w-[360px] sm:w-[460px] h-[360px] sm:h-[460px] rounded-full bg-gradient-to-tr from-gold-500/30 via-warm-400/25 to-honey-light/40 blur-[70px] animate-pulse-glow" />
 
+            {/* Floating Official VIP Book App Icon Badge (PWA & Web) */}
+            <div className="absolute -top-3 left-2 sm:left-6 bg-gradient-to-br from-[#1C1008] to-[#2B170B] text-gold-300 p-2 sm:p-2.5 rounded-2xl shadow-2xl z-30 border-2 border-gold-400/90 animate-float flex items-center gap-2.5 backdrop-blur-md">
+              <img
+                src="/images/logo-book-vip.png"
+                alt="Book VIP Leo"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-gold-400 shadow-md object-cover"
+              />
+              <div className="flex flex-col text-left">
+                <span className="text-[9px] uppercase font-black tracking-widest text-gold-400">GHIM MÀN HÌNH</span>
+                <span className="text-xs font-black text-white leading-tight">BOOK VIP LEO</span>
+                <span className="text-[8px] text-amber-200/80 font-semibold">Mở sách 1-chạm cực nhanh</span>
+              </div>
+            </div>
+
             {/* Floating Promo Badge */}
             <div className="absolute top-2 right-2 sm:right-6 bg-gradient-to-r from-warm-600 to-gold-500 text-white p-3 sm:p-4 rounded-2xl shadow-2xl z-30 border border-amber-200 animate-float flex flex-col items-center">
               <span className="text-[10px] uppercase font-bold tracking-widest text-amber-100">LEO ENGLISH PRO</span>

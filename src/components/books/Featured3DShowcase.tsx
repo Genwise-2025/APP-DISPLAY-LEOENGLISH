@@ -48,6 +48,13 @@ export const Featured3DShowcase: React.FC<Featured3DShowcaseProps> = ({
     <section className="relative z-10 py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Title & Badge */}
       <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="flex justify-center mb-3">
+          <img
+            src="/images/logo-book-vip.png"
+            alt="Book VIP Leo"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl border-2 border-gold-400 shadow-glow-gold object-cover hover:scale-105 transition-transform"
+          />
+        </div>
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-gold-500/20 to-warm-500/20 border border-gold-400/40 text-gold-300 text-xs font-bold uppercase tracking-wider mb-3 shadow-glow-gold">
           <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: '6s' }} />
           KHÔNG GIAN TRƯNG BÀY SÁCH 3D TƯƠNG TÁC

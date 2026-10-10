@@ -24,7 +24,6 @@ import { BookGroup2LandingPage } from './components/books/BookGroup2LandingPage'
 import { BookGroup3LandingPage } from './components/books/BookGroup3LandingPage';
 import { VIPBookLibraryPage } from './components/books/VIPBookLibraryPage';
 import { StudentAuthModal } from './components/modals/StudentAuthModal';
-import { AdminStudentManagerModal } from './components/modals/AdminStudentManagerModal';
 import { useCart } from './context/CartContext';
 
 export const AppContent: React.FC = () => {
@@ -124,10 +123,6 @@ export const AppContent: React.FC = () => {
       <ProductDetailModal />
       <CartDrawer />
       <AdminCMSModal />
-      <AdminStudentManagerModal
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-      />
       <StudentAuthModal
         isOpen={isStudentAuthModalOpen}
         onClose={() => setIsStudentAuthModalOpen(false)}

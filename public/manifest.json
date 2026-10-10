@@ -1,11 +1,11 @@
 {
-  "name": "LeoEnglish Pro — Hệ Sinh Thái Học Ngoại Ngữ",
-  "short_name": "LeoEnglish Pro",
-  "description": "Ứng dụng học tiếng Anh & tiếng Trung thông minh với AI chấm phát âm và phản xạ 3 giây.",
+  "name": "Book VIP Leo — Kho Sách VIP & Phần Mềm Leo English",
+  "short_name": "Book VIP Leo",
+  "description": "Kho Sách Số Bản Quyền VIP 11 Hạng Mục & Hệ Sinh Thái Ngoại Ngữ Leo English.",
   "start_url": "/",
   "id": "/",
   "display": "standalone",
-  "background_color": "#1F1209",
+  "background_color": "#140A04",
   "theme_color": "#F5B700",
   "orientation": "portrait",
   "lang": "vi",
@@ -42,6 +42,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/images/logo-book-vip.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

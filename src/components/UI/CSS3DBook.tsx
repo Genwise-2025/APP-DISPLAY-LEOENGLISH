@@ -146,6 +146,14 @@ export const CSS3DBook: React.FC<CSS3DBookProps> = ({
             </div>
           )}
 
+          {/* Gold VIP Seal Stamp */}
+          <div 
+            className="absolute bottom-2.5 right-2.5 w-8 h-8 rounded-xl overflow-hidden border border-gold-400/80 shadow-md bg-black/50 backdrop-blur-[2px] opacity-90 group-hover:opacity-100 transition-opacity pointer-events-none"
+            title="Book VIP LeoEnglish - Bản quyền chính hãng"
+          >
+            <img src="/images/logo-book-vip.png" alt="Book VIP Seal" className="w-full h-full object-cover" />
+          </div>
+
           {/* Badge Overlay */}
           {badge && (
             <div className="absolute top-3 right-3 bg-gradient-to-r from-warm-500 to-gold-500 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">

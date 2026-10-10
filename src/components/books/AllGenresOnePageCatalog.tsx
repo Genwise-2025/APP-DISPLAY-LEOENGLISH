@@ -68,6 +68,13 @@ export const AllGenresOnePageCatalog: React.FC<AllGenresOnePageCatalogProps> = (
     <section id="kho-sach-toan-dien" className="relative z-10 py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="flex justify-center mb-3">
+          <img
+            src="/images/logo-book-vip.png"
+            alt="Book VIP Leo"
+            className="w-14 h-14 rounded-2xl border-2 border-gold-400 shadow-glow-gold object-cover hover:scale-105 transition-transform"
+          />
+        </div>
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-400/30 text-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
           <Layers className="w-3.5 h-3.5 text-gold-400" />
           TẤT CẢ 11 THỂ LOẠI NẰM GỌN TRONG 1 TRANG
