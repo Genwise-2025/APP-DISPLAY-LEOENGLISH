@@ -39,16 +39,16 @@ export const Footer: React.FC = () => {
               Hệ sinh thái sản phẩm giáo dục ngoại ngữ (Tiếng Anh - Tiếng Trung) hiện đại bậc nhất cho người Việt. Mô hình 3D trực quan, sách in màu cao cấp và phần mềm AI học tập trọn đời.
             </p>
 
-            <div className="space-y-2 text-xs text-amber-200/90 font-medium">
-              <div className="flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-gold-400" />
-                <span>Zalo hỗ trợ 24/7: <strong className="text-gold-300 font-bold">0799713094</strong></span>
+              <div className="space-y-2 text-xs text-amber-200/90 font-medium">
+                <div className="flex items-center gap-2">
+                  <PhoneCall className="w-4 h-4 text-gold-400" />
+                  <span>Zalo Thầy Leo hỗ trợ: <strong className="text-gold-300 font-bold">0799713094</strong></span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-gold-400" />
+                  <span>Gmail Admin Duyệt Sách: <strong className="text-gold-300 font-bold font-mono">nguyentoandinh.0511@gmail.com</strong></span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gold-400" />
-                <span>Email: <strong className="text-gold-300 font-bold">hotro@leoeducation.vn</strong></span>
-              </div>
-            </div>
 
             {/* Social Icons */}
             <div className="flex items-center gap-3 pt-2">

@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, CartItem } from '../types/product';
 import { PRODUCTS_DATA } from '../data/products';
 
+import { StudentAccount } from '../types/student';
+
 interface ToastMessage {
   id: string;
   type: 'success' | 'info' | 'warning';
@@ -24,6 +26,19 @@ interface CartContextType {
   isAdminAuthenticated: boolean;
   loginAdmin: (email: string, passKey: string) => boolean;
   logoutAdmin: () => void;
+
+  // Student Accounts & Gmail Approval System (Yêu cầu Admin duyệt Gmail tải sách)
+  students: StudentAccount[];
+  currentStudentEmail: string | null;
+  currentStudent: StudentAccount | null;
+  isStudentApproved: boolean;
+  loginStudent: (email: string, fullName?: string) => { success: boolean; status: 'approved' | 'pending' | 'blocked'; message: string };
+  logoutStudent: () => void;
+  approveStudent: (email: string) => void;
+  blockStudent: (email: string) => void;
+  unblockStudent: (email: string) => void;
+  deleteStudent: (email: string) => void;
+  addStudentDirectly: (email: string, status?: 'approved' | 'pending', fullName?: string) => void;
 
   // Cart
   cart: CartItem[];
@@ -48,6 +63,9 @@ interface CartContextType {
 
   isAdminOpen: boolean;
   setIsAdminOpen: (open: boolean) => void;
+
+  isStudentAuthModalOpen: boolean;
+  setIsStudentAuthModalOpen: (open: boolean) => void;
   
   // Search & Filter Global State
   searchQuery: string;
@@ -72,6 +90,45 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 const CART_STORAGE_KEY = 'LEO_EDUCATION_CART_V2';
 const PRODUCTS_STORAGE_KEY = 'LEO_EDUCATION_CUSTOM_PRODUCTS_V6';
 const ADMIN_EMAIL_STORAGE_KEY = 'LEO_ADMIN_SESSION_EMAIL_V2';
+const STUDENTS_STORAGE_KEY = 'LEO_STUDENT_ACCOUNTS_V2';
+const STUDENT_SESSION_KEY = 'LEO_ACTIVE_STUDENT_EMAIL_V2';
+
+const DEFAULT_STUDENTS: StudentAccount[] = [
+  {
+    id: 'std-admin',
+    email: 'nguyentoandinh.0511@gmail.com',
+    fullName: 'Admin Nguyễn Toàn Định',
+    status: 'approved',
+    registeredAt: '2026-01-01T08:00:00.000Z',
+    approvedAt: '2026-01-01T08:00:00.000Z',
+    notes: 'Quản Trị Viên'
+  },
+  {
+    id: 'std-demo-1',
+    email: 'hocvien.vip@gmail.com',
+    fullName: 'Học Viên VIP (Mẫu Đã Duyệt)',
+    status: 'approved',
+    registeredAt: '2026-10-01T10:00:00.000Z',
+    approvedAt: '2026-10-01T10:30:00.000Z',
+    notes: 'Đã hoàn thành học phí - Được phép tải toàn bộ sách'
+  },
+  {
+    id: 'std-demo-2',
+    email: 'hocvien.choduyet@gmail.com',
+    fullName: 'Học Viên Mới (Mẫu Chờ Duyệt)',
+    status: 'pending',
+    registeredAt: '2026-10-10T14:20:00.000Z',
+    notes: 'Vừa đăng ký qua web, đang chờ Admin duyệt'
+  },
+  {
+    id: 'std-demo-3',
+    email: 'hocvien.spam@gmail.com',
+    fullName: 'Tài Khoản Khóa (Mẫu Bị Chặn)',
+    status: 'blocked',
+    registeredAt: '2026-09-15T09:00:00.000Z',
+    notes: 'Đã bị Admin chặn tải sách'
+  }
+];
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Admin Authentication State
@@ -85,6 +142,43 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   const isAdminAuthenticated = adminEmail?.trim().toLowerCase() === AUTHORIZED_ADMIN_EMAIL.toLowerCase();
+
+  // Student Accounts State
+  const [students, setStudents] = useState<StudentAccount[]>(() => {
+    try {
+      const saved = localStorage.getItem(STUDENTS_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.error('Failed to load students:', e);
+    }
+    return DEFAULT_STUDENTS;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STUDENTS_STORAGE_KEY, JSON.stringify(students));
+    } catch (e) {
+      console.error('Failed to save students:', e);
+    }
+  }, [students]);
+
+  // Current Active Student Session State
+  const [currentStudentEmail, setCurrentStudentEmail] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem(STUDENT_SESSION_KEY) || null;
+    } catch {
+      return null;
+    }
+  });
+
+  const currentStudent = currentStudentEmail 
+    ? students.find(s => s.email.toLowerCase() === currentStudentEmail.toLowerCase()) || null 
+    : null;
+
+  const isStudentApproved = isAdminAuthenticated || (currentStudent?.status === 'approved');
 
   // Initialize Dynamic Products from LocalStorage or Fallback to Default PRODUCTS_DATA
   const [products, setProducts] = useState<Product[]>(() => {
@@ -113,6 +207,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isStudentAuthModalOpen, setIsStudentAuthModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -256,6 +351,177 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     addToast('Đã đăng xuất', 'Đã đăng xuất tài khoản Admin thành công.', 'info');
   };
 
+  // Student Login / Request Access
+  const loginStudent = (
+    email: string,
+    fullName?: string
+  ): { success: boolean; status: 'approved' | 'pending' | 'blocked'; message: string } => {
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      addToast('Email không hợp lệ', 'Vui lòng nhập đúng địa chỉ Gmail.', 'warning');
+      return { success: false, status: 'pending', message: 'Email không hợp lệ' };
+    }
+
+    // If it's Admin email
+    if (cleanEmail === AUTHORIZED_ADMIN_EMAIL.toLowerCase()) {
+      setCurrentStudentEmail(cleanEmail);
+      localStorage.setItem(STUDENT_SESSION_KEY, cleanEmail);
+      addToast('Chào mừng Admin!', `Tài khoản ${cleanEmail} có toàn quyền tải sách.`, 'success');
+      return { success: true, status: 'approved', message: 'Tài khoản Admin đã kích hoạt toàn quyền tải sách!' };
+    }
+
+    const existing = students.find((s) => s.email.toLowerCase() === cleanEmail);
+
+    if (existing) {
+      setCurrentStudentEmail(cleanEmail);
+      localStorage.setItem(STUDENT_SESSION_KEY, cleanEmail);
+
+      if (existing.status === 'approved') {
+        addToast(
+          'Đã duyệt tải sách!',
+          `Xin chào ${existing.fullName || cleanEmail}! Bạn đã được duyệt quyền tải toàn bộ sách VIP.`,
+          'success'
+        );
+        return { success: true, status: 'approved', message: 'Tài khoản của bạn đã được duyệt tải sách!' };
+      } else if (existing.status === 'blocked') {
+        addToast(
+          'Tài khoản bị chặn',
+          `Gmail "${cleanEmail}" đã bị chặn tải sách. Vui lòng liên hệ Admin qua Zalo 0799713094.`,
+          'warning'
+        );
+        return { success: false, status: 'blocked', message: 'Tài khoản này đã bị Admin tạm khóa quyền tải sách.' };
+      } else {
+        addToast(
+          'Đang chờ Admin duyệt',
+          `Gmail "${cleanEmail}" đang chờ Admin nguyentoandinh.0511@gmail.com phê duyệt.`,
+          'info'
+        );
+        return {
+          success: false,
+          status: 'pending',
+          message: 'Tài khoản của bạn đang chờ Admin phê duyệt. Vui lòng liên hệ Admin để được duyệt nhanh!'
+        };
+      }
+    }
+
+    // If student not found, register new pending student
+    const newStudent: StudentAccount = {
+      id: `std-${Date.now()}`,
+      email: cleanEmail,
+      fullName: fullName || cleanEmail.split('@')[0],
+      status: 'pending',
+      registeredAt: new Date().toISOString(),
+      notes: 'Đăng ký tự động từ trang web'
+    };
+
+    setStudents((prev) => [newStudent, ...prev]);
+    setCurrentStudentEmail(cleanEmail);
+    localStorage.setItem(STUDENT_SESSION_KEY, cleanEmail);
+
+    addToast(
+      'Đã gửi yêu cầu duyệt!',
+      `Gmail "${cleanEmail}" đã được gửi tới Admin nguyentoandinh.0511@gmail.com chờ duyệt.`,
+      'info'
+    );
+
+    return {
+      success: false,
+      status: 'pending',
+      message: 'Đã gửi yêu cầu nhận quyền tải sách tới Admin nguyentoandinh.0511@gmail.com thành công!'
+    };
+  };
+
+  const logoutStudent = () => {
+    setCurrentStudentEmail(null);
+    localStorage.removeItem(STUDENT_SESSION_KEY);
+    addToast('Đã đăng xuất', 'Đã thoát tài khoản học viên.', 'info');
+  };
+
+  const approveStudent = (email: string) => {
+    const cleanEmail = email.trim().toLowerCase();
+    setStudents((prev) =>
+      prev.map((s) =>
+        s.email.toLowerCase() === cleanEmail
+          ? { ...s, status: 'approved', approvedAt: new Date().toISOString() }
+          : s
+      )
+    );
+    addToast('Đã DUYỆT học viên!', `Đã cấp quyền tải sách thành công cho ${cleanEmail}.`, 'success');
+  };
+
+  const blockStudent = (email: string) => {
+    const cleanEmail = email.trim().toLowerCase();
+    setStudents((prev) =>
+      prev.map((s) =>
+        s.email.toLowerCase() === cleanEmail
+          ? { ...s, status: 'blocked' }
+          : s
+      )
+    );
+    addToast('Đã CHẶN học viên!', `Đã khóa quyền tải sách của ${cleanEmail}.`, 'warning');
+  };
+
+  const unblockStudent = (email: string) => {
+    const cleanEmail = email.trim().toLowerCase();
+    setStudents((prev) =>
+      prev.map((s) =>
+        s.email.toLowerCase() === cleanEmail
+          ? { ...s, status: 'approved' }
+          : s
+      )
+    );
+    addToast('Đã mở khóa học viên!', `Đã khôi phục quyền tải sách cho ${cleanEmail}.`, 'success');
+  };
+
+  const deleteStudent = (email: string) => {
+    const cleanEmail = email.trim().toLowerCase();
+    setStudents((prev) => prev.filter((s) => s.email.toLowerCase() !== cleanEmail));
+    if (currentStudentEmail?.toLowerCase() === cleanEmail) {
+      setCurrentStudentEmail(null);
+      localStorage.removeItem(STUDENT_SESSION_KEY);
+    }
+    addToast('Đã XÓA học viên!', `Đã gỡ hoàn toàn tài khoản ${cleanEmail} khỏi hệ thống.`, 'info');
+  };
+
+  const addStudentDirectly = (
+    email: string,
+    status: 'approved' | 'pending' = 'approved',
+    fullName?: string
+  ) => {
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      addToast('Lỗi', 'Email không hợp lệ.', 'warning');
+      return;
+    }
+
+    setStudents((prev) => {
+      const exists = prev.find((s) => s.email.toLowerCase() === cleanEmail);
+      if (exists) {
+        return prev.map((s) =>
+          s.email.toLowerCase() === cleanEmail
+            ? { ...s, status, fullName: fullName || s.fullName }
+            : s
+        );
+      }
+      const newAcc: StudentAccount = {
+        id: `std-${Date.now()}`,
+        email: cleanEmail,
+        fullName: fullName || cleanEmail.split('@')[0],
+        status,
+        registeredAt: new Date().toISOString(),
+        approvedAt: status === 'approved' ? new Date().toISOString() : undefined,
+        notes: 'Admin thêm trực tiếp'
+      };
+      return [newAcc, ...prev];
+    });
+
+    addToast(
+      'Thao tác thành công!',
+      `Học viên ${cleanEmail} đã được thiết lập: ${status === 'approved' ? 'ĐÃ DUYỆT' : 'CHỜ DUYỆT'}.`,
+      'success'
+    );
+  };
+
   // Product CRUD (Restricted to Authorized Admin)
   const addProduct = (newProduct: Product) => {
     if (!isAdminAuthenticated) {
@@ -296,7 +562,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return [...prev, { product, quantity }];
     });
-
     addToast(
       'Đã thêm vào giỏ hàng!',
       `Sản phẩm "${product.name.slice(0, 30)}..." đã được thêm vào giỏ.`
@@ -346,6 +611,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAdminAuthenticated,
         loginAdmin,
         logoutAdmin,
+        students,
+        currentStudentEmail,
+        currentStudent,
+        isStudentApproved,
+        loginStudent,
+        logoutStudent,
+        approveStudent,
+        blockStudent,
+        unblockStudent,
+        deleteStudent,
+        addStudentDirectly,
         cart,
         addToCart,
         removeFromCart,
@@ -363,6 +639,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsPromoModalOpen,
         isAdminOpen,
         setIsAdminOpen,
+        isStudentAuthModalOpen,
+        setIsStudentAuthModalOpen,
         searchQuery,
         setSearchQuery,
         activeCategory,

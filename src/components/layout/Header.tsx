@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
-import { ShoppingBag, Search, Menu, X, BookOpen, ShieldCheck, User, LogOut } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, BookOpen, ShieldCheck, User, LogOut, Mail, CheckCircle2 } from 'lucide-react';
 import { MobileMenu } from './MobileMenu';
 
 export const Header: React.FC = () => {
-  const { totalItems, setIsCartOpen, searchQuery, setSearchQuery, setActiveCategory, setIsAdminOpen, isAdminAuthenticated, adminEmail, logoutAdmin, navigateToView } = useCart();
+  const { 
+    totalItems, 
+    setIsCartOpen, 
+    searchQuery, 
+    setSearchQuery, 
+    setActiveCategory, 
+    setIsAdminOpen, 
+    isAdminAuthenticated, 
+    adminEmail, 
+    logoutAdmin, 
+    navigateToView,
+    currentStudentEmail,
+    isStudentApproved,
+    setIsStudentAuthModalOpen
+  } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -205,6 +219,29 @@ export const Header: React.FC = () => {
                   </button>
                 )}
               </div>
+
+              {/* Student Gmail Auth Trigger Button */}
+              {isStudentApproved ? (
+                <button
+                  type="button"
+                  onClick={() => setIsStudentAuthModalOpen(true)}
+                  className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400 text-emerald-800 text-xs font-bold transition-all shadow-sm hover:bg-emerald-500/25"
+                  title="Học viên đã được duyệt tải sách"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="max-w-[120px] truncate">{currentStudentEmail || 'Học Viên VIP'}</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsStudentAuthModalOpen(true)}
+                  className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-gold-500/25 to-warm-500/20 hover:from-amber-500/30 hover:to-warm-500/30 text-darkbrown border border-gold-400/80 text-xs font-black transition-all shadow-sm hover:scale-105"
+                  title="Nhập Gmail để nhận quyền tải sách bản quyền"
+                >
+                  <Mail className="w-3.5 h-3.5 text-warm-600" />
+                  <span>Gmail Tải Sách</span>
+                </button>
+              )}
 
               {/* Cart Drawer Trigger Button */}
               <button

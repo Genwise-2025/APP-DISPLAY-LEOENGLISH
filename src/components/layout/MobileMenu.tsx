@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../../context/CartContext';
-import { X, BookOpen, Sparkles, PhoneCall, User } from 'lucide-react';
+import { X, BookOpen, Sparkles, PhoneCall, User, ShieldCheck, Mail, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface MobileMenuProps {
@@ -10,7 +10,15 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavClick }) => {
-  const { setIsPromoModalOpen, navigateToView } = useCart();
+  const { 
+    setIsPromoModalOpen, 
+    navigateToView, 
+    isStudentApproved, 
+    currentStudentEmail, 
+    setIsStudentAuthModalOpen, 
+    setIsAdminOpen, 
+    isAdminAuthenticated 
+  } = useCart();
 
   return (
     <AnimatePresence>
@@ -183,12 +191,50 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
                 >
                   Chính sách & Cam kết
                 </button>
+                {/* Student Access Button */}
                 <button
                   type="button"
-                  onClick={() => onNavClick(undefined, 'faq-section')}
-                  className="text-left py-2 px-3 rounded-xl hover:bg-gold-200/40"
+                  onClick={() => {
+                    onClose();
+                    setIsStudentAuthModalOpen(true);
+                  }}
+                  className={`text-left py-2.5 px-3 rounded-xl font-black flex items-center justify-between shadow-sm border ${
+                    isStudentApproved
+                      ? 'bg-emerald-500/20 text-emerald-950 border-emerald-400'
+                      : 'bg-gradient-to-r from-amber-500/20 to-gold-500/20 text-darkbrown border-gold-400'
+                  }`}
                 >
-                  FAQ & Trợ giúp
+                  <span className="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-warm-600" />
+                    <span>Gmail Tải Sách: {currentStudentEmail || 'Đăng ký ngay'}</span>
+                  </span>
+                  {isStudentApproved ? (
+                    <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">
+                      ĐÃ DUYỆT
+                    </span>
+                  ) : (
+                    <span className="text-[10px] bg-amber-500 text-darkbrown px-2 py-0.5 rounded-full font-bold">
+                      Xác thực
+                    </span>
+                  )}
+                </button>
+
+                {/* Admin Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    setIsAdminOpen(true);
+                  }}
+                  className="text-left py-2.5 px-3 rounded-xl bg-darkbrown text-gold-300 font-black flex items-center justify-between border border-gold-500/40 shadow-sm"
+                >
+                  <span className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-gold-400" />
+                    <span>Admin: nguyentoandinh.0511@gmail.com</span>
+                  </span>
+                  <span className="text-[10px] bg-gold-500 text-darkbrown px-2 py-0.5 rounded-full font-bold">
+                    {isAdminAuthenticated ? 'ĐÃ ĐĂNG NHẬP' : 'QUẢN TRỊ'}
+                  </span>
                 </button>
               </nav>
             </div>

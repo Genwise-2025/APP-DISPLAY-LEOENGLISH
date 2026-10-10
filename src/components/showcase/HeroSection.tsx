@@ -149,22 +149,24 @@ export const HeroSection: React.FC = () => {
             <div className="mt-7 flex flex-wrap items-center gap-4 w-full sm:w-auto">
               <button
                 type="button"
-                onClick={scrollToAppShowcase}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-gold-500 via-warm-400 to-warm-500 hover:from-gold-400 hover:to-warm-600 text-darkbrown font-black text-sm shadow-glow-warm hover:scale-105 transition-all flex items-center justify-center gap-2 group border border-amber-200"
+                onClick={() => {
+                  const el = document.getElementById('kho-sach');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-gold-500 to-warm-500 text-darkbrown font-black text-sm shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2 border border-gold-300"
               >
-                Khám Phá Chi Tiết Các App
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <BookOpen className="w-4 h-4 text-darkbrown" />
+                <span>Thư Viện Sách 3D (11 Thể Loại)</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
 
-              <a
-                href="https://catalog.zalo.me/?cid=CDd8JZoPdmrJrgrSM9UBSYIjerTHu_K7Ei7OL3_--nawlg1FDOFwOm"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2"
+              <button
+                type="button"
+                onClick={scrollToAppShowcase}
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white hover:bg-gold-50 text-darkbrown font-extrabold text-sm border-2 border-gold-400/80 shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2"
               >
-                <ExternalLink className="w-4 h-4" />
-                <span>Xem Trên Zalo Catalog</span>
-              </a>
+                <span>Ứng Dụng Học Tập</span>
+              </button>
             </div>
 
             {/* Teacher Zalo Contact Callout */}

@@ -1,3 +1,20 @@
+export type BookCategoryType = 
+  | 'all'
+  | 'communication' 
+  | 'business' 
+  | 'reflex' 
+  | 'travel' 
+  | 'feeling-hill' 
+  | 'ielts' 
+  | 'pro-vocab' 
+  | 'hotel-realestate' 
+  | 'livestream' 
+  | 'story' 
+  | 'writing'
+  | 'vocabulary' 
+  | 'grammar-ielts' 
+  | 'chinese';
+
 export interface BookItem {
   id: string;
   title: string;
@@ -7,7 +24,8 @@ export interface BookItem {
   originalPrice: number; // 80,000 VND
   promoPrice: number;    // 40,000 VND (50% off for new students)
   discountPercent: number; // 50
-  category: 'communication' | 'vocabulary' | 'business' | 'grammar-ielts' | 'chinese' | 'story';
+  category: BookCategoryType;
+  categoryNumber?: number; // 1 to 11
   categoryLabel: string;
   pages: number;
   fileSize: string;
@@ -19,6 +37,7 @@ export interface BookItem {
   badge?: string;
   rating?: number;
   reviewsCount?: number;
+  spineColor?: string;
 }
 
 export interface BookGroup {

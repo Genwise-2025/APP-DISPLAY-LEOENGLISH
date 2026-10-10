@@ -22,10 +22,18 @@ import { BookLibraryHub } from './components/books/BookLibraryHub';
 import { Book1000LandingPage } from './components/books/Book1000LandingPage';
 import { BookGroup2LandingPage } from './components/books/BookGroup2LandingPage';
 import { BookGroup3LandingPage } from './components/books/BookGroup3LandingPage';
+import { StudentAuthModal } from './components/modals/StudentAuthModal';
+import { AdminStudentManagerModal } from './components/modals/AdminStudentManagerModal';
 import { useCart } from './context/CartContext';
 
 export const AppContent: React.FC = () => {
-  const { currentView } = useCart();
+  const { 
+    currentView, 
+    isStudentAuthModalOpen, 
+    setIsStudentAuthModalOpen, 
+    isAdminOpen, 
+    setIsAdminOpen 
+  } = useCart();
 
   if (currentView === '1000-cau') {
     return (
@@ -101,6 +109,14 @@ export const AppContent: React.FC = () => {
       <ProductDetailModal />
       <CartDrawer />
       <AdminCMSModal />
+      <AdminStudentManagerModal
+        isOpen={isAdminOpen}
+        onClose={() => setIsAdminOpen(false)}
+      />
+      <StudentAuthModal
+        isOpen={isStudentAuthModalOpen}
+        onClose={() => setIsStudentAuthModalOpen(false)}
+      />
       <ToastNotification />
     </div>
   );
