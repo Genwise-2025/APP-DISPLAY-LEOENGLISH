@@ -89,6 +89,19 @@ export const Header: React.FC = () => {
                 Trang chủ
               </button>
 
+              {/* DEDICATED VIP BOOK LIBRARY PAGE */}
+              <button
+                type="button"
+                onClick={() => navigateToView('kho-sach-vip')}
+                className="transition-all py-1 px-3 rounded-xl bg-gradient-to-r from-amber-500/25 via-gold-500/30 to-warm-500/25 hover:from-amber-500/40 hover:to-warm-500/40 text-darkbrown border-2 border-gold-400 font-black shadow-sm hover:shadow-md hover:scale-105 flex items-center gap-1.5"
+                title="Trang riêng Kho Sách Số VIP (Full 11 mục, tải full từng mục bằng Gmail)"
+              >
+                <span>👑 KHO SÁCH VIP (FULL)</span>
+                <span className="px-1.5 py-0.2 bg-gradient-to-r from-gold-500 to-warm-500 text-white text-[9px] font-black rounded-full animate-pulse">
+                  HOT
+                </span>
+              </button>
+
               {/* DEDICATED 3 BOOK GROUPS QUICK NAV */}
               <div className="flex items-center gap-1.5">
                 <button

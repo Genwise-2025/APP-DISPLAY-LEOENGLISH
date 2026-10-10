@@ -69,6 +69,23 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, onNavCl
                   Trang chủ
                 </button>
 
+                {/* DEDICATED VIP PAGE BUTTON */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigateToView('kho-sach-vip');
+                    onClose();
+                  }}
+                  className="text-left py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500/30 via-gold-500/35 to-warm-500/30 text-darkbrown border-2 border-gold-400 font-black flex items-center justify-between shadow-md"
+                >
+                  <span className="flex items-center gap-2">
+                    <span>👑 KHO SÁCH VIP (FULL 11 MỤC)</span>
+                  </span>
+                  <span className="px-2 py-0.5 bg-gold-500 text-darkbrown text-[10px] font-black rounded-full animate-pulse">
+                    MỞ KHÓA
+                  </span>
+                </button>
+
                 {/* DEDICATED 3 GROUPS BUTTONS IN MOBILE MENU */}
                 <button
                   type="button"

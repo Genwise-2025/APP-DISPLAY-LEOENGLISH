@@ -83,7 +83,7 @@ interface CartContextType {
   navigateToView: (view: AppView) => void;
 }
 
-export type AppView = 'home' | '1000-cau' | 'nhom-2' | 'nhom-3';
+export type AppView = 'home' | '1000-cau' | 'nhom-2' | 'nhom-3' | 'kho-sach-vip';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -219,6 +219,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       if (
+        path.includes('kho-sach-vip') || 
+        path.includes('sach-vip') || 
+        search.includes('kho-sach-vip') || 
+        hash.includes('kho-sach-vip')
+      ) {
+        return 'kho-sach-vip';
+      }
+      if (
         path.includes('nhom-2') || 
         path.includes('community-390') || 
         path.includes('t390') || 
@@ -254,7 +262,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const navigateToView = (view: AppView) => {
     setCurrentView(view);
     try {
-      if (view === '1000-cau') {
+      if (view === 'kho-sach-vip') {
+        window.history.pushState({ view: 'kho-sach-vip' }, '', '/kho-sach-vip');
+      } else if (view === '1000-cau') {
         window.history.pushState({ view: '1000-cau' }, '', '/sach-1000-cau');
       } else if (view === 'nhom-2') {
         window.history.pushState({ view: 'nhom-2' }, '', '/nhom-2-community-390');

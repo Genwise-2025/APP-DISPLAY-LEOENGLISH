@@ -22,6 +22,7 @@ import { BookLibraryHub } from './components/books/BookLibraryHub';
 import { Book1000LandingPage } from './components/books/Book1000LandingPage';
 import { BookGroup2LandingPage } from './components/books/BookGroup2LandingPage';
 import { BookGroup3LandingPage } from './components/books/BookGroup3LandingPage';
+import { VIPBookLibraryPage } from './components/books/VIPBookLibraryPage';
 import { StudentAuthModal } from './components/modals/StudentAuthModal';
 import { AdminStudentManagerModal } from './components/modals/AdminStudentManagerModal';
 import { useCart } from './context/CartContext';
@@ -34,6 +35,20 @@ export const AppContent: React.FC = () => {
     isAdminOpen, 
     setIsAdminOpen 
   } = useCart();
+
+  if (currentView === 'kho-sach-vip') {
+    return (
+      <div className="relative min-h-screen selection:bg-gold-500 selection:text-white">
+        <VIPBookLibraryPage />
+
+        {/* Global Modals & Notifications */}
+        <ProductDetailModal />
+        <CartDrawer />
+        <AdminCMSModal />
+        <ToastNotification />
+      </div>
+    );
+  }
 
   if (currentView === '1000-cau') {
     return (
