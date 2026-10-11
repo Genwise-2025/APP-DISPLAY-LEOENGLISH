@@ -92,6 +92,8 @@ const PRODUCTS_STORAGE_KEY = 'LEO_EDUCATION_CUSTOM_PRODUCTS_V6';
 const ADMIN_EMAIL_STORAGE_KEY = 'LEO_ADMIN_SESSION_EMAIL_V2';
 const STUDENTS_STORAGE_KEY = 'LEO_STUDENT_ACCOUNTS_V2';
 const STUDENT_SESSION_KEY = 'LEO_ACTIVE_STUDENT_EMAIL_V2';
+const CLOUD_SYNC_TOPIC = 'leoenglish-vip-student-sync-v1';
+const CLOUD_SYNC_URL = `https://ntfy.sh/${CLOUD_SYNC_TOPIC}`;
 
 const DEFAULT_STUDENTS: StudentAccount[] = [
   {
@@ -102,6 +104,14 @@ const DEFAULT_STUDENTS: StudentAccount[] = [
     registeredAt: '2026-01-01T08:00:00.000Z',
     approvedAt: '2026-01-01T08:00:00.000Z',
     notes: 'Quản Trị Viên'
+  },
+  {
+    id: 'std-kieulinh-06051992',
+    email: 'kieulinh06051992@gmail.com',
+    fullName: 'Học Viên Kiều Linh',
+    status: 'pending',
+    registeredAt: '2026-10-11T04:30:00.000Z',
+    notes: 'Đăng ký tải sách VIP'
   },
   {
     id: 'std-demo-1',
@@ -143,13 +153,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const isAdminAuthenticated = adminEmail?.trim().toLowerCase() === AUTHORIZED_ADMIN_EMAIL.toLowerCase();
 
-  // Student Accounts State
+  // Student Accounts State (with automatic merge of DEFAULT_STUDENTS)
   const [students, setStudents] = useState<StudentAccount[]>(() => {
     try {
       const saved = localStorage.getItem(STUDENTS_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Merge with DEFAULT_STUDENTS so new pre-registered emails (like kieulinh06051992@gmail.com) are ALWAYS injected
+          const merged = [...parsed];
+          DEFAULT_STUDENTS.forEach((ds) => {
+            if (!merged.some((m) => m.email.toLowerCase() === ds.email.toLowerCase())) {
+              merged.unshift(ds);
+            }
+          });
+          return merged;
+        }
       }
     } catch (e) {
       console.error('Failed to load students:', e);
@@ -164,6 +183,115 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error('Failed to save students:', e);
     }
   }, [students]);
+
+  // Cloud Sync Broadcaster helper
+  const broadcastStudentAction = async (payload: {
+    action: 'register' | 'approve' | 'block' | 'unblock' | 'delete';
+    email: string;
+    fullName?: string;
+    status?: 'approved' | 'pending' | 'blocked';
+    notes?: string;
+  }) => {
+    try {
+      await fetch(CLOUD_SYNC_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...payload,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch (err) {
+      console.warn('Sync broadcast error:', err);
+    }
+  };
+
+  // Real-Time Cross-Device Sync Poller
+  useEffect(() => {
+    let isCancelled = false;
+
+    const syncCloudData = async () => {
+      try {
+        const res = await fetch(`${CLOUD_SYNC_URL}/json?poll=1&since=48h`);
+        if (!res.ok) return;
+        const rawText = await res.text();
+        if (!rawText || isCancelled) return;
+
+        const lines = rawText.trim().split('\n');
+        lines.forEach((line) => {
+          if (!line.trim()) return;
+          try {
+            const parsedEnvelope = JSON.parse(line);
+            if (parsedEnvelope.event !== 'message' || !parsedEnvelope.message) return;
+            const data = JSON.parse(parsedEnvelope.message);
+            if (!data.email || !data.action) return;
+
+            const targetEmail = data.email.trim().toLowerCase();
+
+            if (data.action === 'register') {
+              setStudents((prev) => {
+                if (prev.some((s) => s.email.toLowerCase() === targetEmail)) return prev;
+                const newAcc: StudentAccount = {
+                  id: `std-cloud-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+                  email: targetEmail,
+                  fullName: data.fullName || targetEmail.split('@')[0],
+                  status: (data.status as any) || 'pending',
+                  registeredAt: data.timestamp || new Date().toISOString(),
+                  notes: data.notes || 'Đăng ký qua mạng (Cloud Sync)'
+                };
+                return [newAcc, ...prev];
+              });
+            } else if (data.action === 'approve') {
+              setStudents((prev) =>
+                prev.map((s) =>
+                  s.email.toLowerCase() === targetEmail
+                    ? { ...s, status: 'approved', approvedAt: data.timestamp || new Date().toISOString() }
+                    : s
+                )
+              );
+            } else if (data.action === 'block') {
+              setStudents((prev) =>
+                prev.map((s) =>
+                  s.email.toLowerCase() === targetEmail
+                    ? { ...s, status: 'blocked' }
+                    : s
+                )
+              );
+            } else if (data.action === 'unblock') {
+              setStudents((prev) =>
+                prev.map((s) =>
+                  s.email.toLowerCase() === targetEmail
+                    ? { ...s, status: 'approved' }
+                    : s
+                )
+              );
+            } else if (data.action === 'delete') {
+              setStudents((prev) => prev.filter((s) => s.email.toLowerCase() !== targetEmail));
+            }
+          } catch {
+            // ignore malformed line
+          }
+        });
+      } catch {
+        // network offline, ignore
+      }
+    };
+
+    // Initial sync
+    syncCloudData();
+
+    // Poll every 4 seconds for instant cross-device updates
+    const pollInterval = setInterval(syncCloudData, 4000);
+
+    const onWindowFocus = () => syncCloudData();
+    window.addEventListener('focus', onWindowFocus);
+
+    return () => {
+      isCancelled = true;
+      clearInterval(pollInterval);
+      window.removeEventListener('focus', onWindowFocus);
+    };
+  }, []);
 
   // Current Active Student Session State
   const [currentStudentEmail, setCurrentStudentEmail] = useState<string | null>(() => {
@@ -386,6 +514,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCurrentStudentEmail(cleanEmail);
       localStorage.setItem(STUDENT_SESSION_KEY, cleanEmail);
 
+      // Broadcast registration status so other devices/Admin instantly see this active student
+      broadcastStudentAction({
+        action: 'register',
+        email: cleanEmail,
+        fullName: existing.fullName,
+        status: existing.status
+      });
+
       if (existing.status === 'approved') {
         addToast(
           'Đã duyệt tải sách!',
@@ -428,6 +564,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCurrentStudentEmail(cleanEmail);
     localStorage.setItem(STUDENT_SESSION_KEY, cleanEmail);
 
+    // Broadcast registration to Admin across devices
+    broadcastStudentAction({
+      action: 'register',
+      email: cleanEmail,
+      fullName: newStudent.fullName,
+      status: 'pending'
+    });
+
     addToast(
       'Đã gửi yêu cầu duyệt!',
       `Gmail "${cleanEmail}" đã được gửi tới Admin nguyentoandinh.0511@gmail.com chờ duyệt.`,
@@ -456,6 +600,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           : s
       )
     );
+    broadcastStudentAction({ action: 'approve', email: cleanEmail, status: 'approved' });
     addToast('Đã DUYỆT học viên!', `Đã cấp quyền tải sách thành công cho ${cleanEmail}.`, 'success');
   };
 
@@ -468,6 +613,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           : s
       )
     );
+    broadcastStudentAction({ action: 'block', email: cleanEmail, status: 'blocked' });
     addToast('Đã CHẶN học viên!', `Đã khóa quyền tải sách của ${cleanEmail}.`, 'warning');
   };
 
@@ -480,6 +626,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           : s
       )
     );
+    broadcastStudentAction({ action: 'unblock', email: cleanEmail, status: 'approved' });
     addToast('Đã mở khóa học viên!', `Đã khôi phục quyền tải sách cho ${cleanEmail}.`, 'success');
   };
 
@@ -490,6 +637,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCurrentStudentEmail(null);
       localStorage.removeItem(STUDENT_SESSION_KEY);
     }
+    broadcastStudentAction({ action: 'delete', email: cleanEmail });
     addToast('Đã XÓA học viên!', `Đã gỡ hoàn toàn tài khoản ${cleanEmail} khỏi hệ thống.`, 'info');
   };
 
@@ -523,6 +671,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         notes: 'Admin thêm trực tiếp'
       };
       return [newAcc, ...prev];
+    });
+
+    broadcastStudentAction({
+      action: status === 'approved' ? 'approve' : 'register',
+      email: cleanEmail,
+      fullName,
+      status
     });
 
     addToast(
